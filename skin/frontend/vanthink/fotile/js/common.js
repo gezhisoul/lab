@@ -4,10 +4,9 @@ jQuery(function() {
     var urls=url.substr(url.length-5,url.length);
     var a1=jQuery.browser.msie&&(jQuery.browser.version == "6.0") && urls!='/noIe' ;
     var a2=jQuery.browser.msie&&(jQuery.browser.version == "7.0") && urls!='/noIe' ;
-    var a3=jQuery.browser.msie&&(jQuery.browser.version == "8.0") && urls!='/noIe' ;
-    if(a1 || a2 || a3){
-        window.location.href='/noIe';
-    }
+    // if(a1 || a2 || a3){
+    //     window.location.href='/noIe';
+    // }
     var dropdown = jQuery('nav ul li');
     var topdrop = jQuery('section .posr');
     dropdown.hoverIntent({
