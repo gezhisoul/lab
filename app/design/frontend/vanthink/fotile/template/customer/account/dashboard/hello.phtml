@@ -1,0 +1,18 @@
+<?php
+$groups = $this->helper('customer')->getGroups()->toOptionArray();
+$current_group = end($groups);
+foreach ($groups as $group) {
+    if (Mage::getSingleton('customer/session')->getCustomer()->getGroupId() == $group['value']) {
+        $current_group = $group;
+        break;
+    }
+}
+?>
+<div class="welcome-msg">
+    <p class="hello-account"><?php echo $this->__('Hello, %s!', $this->htmlEscape($this->getCustomerName())) ?> 欢迎您回来<label>账户积分：</label><span class="d21">0</span><label>总消费额：</label><span>￥0.00</span></p>
+  <div class="hy_dj d21">
+    <span>您目前的等级：</span><img src=<?php print $this->getSkinUrl()."images/ironBrand.gif"?>  alt="" /><?php print $group['label']; // 输出会员等级?>
+    <label>累计消费 ￥3000 元即可升级为VIP</label>
+  </div>
+</div>
+

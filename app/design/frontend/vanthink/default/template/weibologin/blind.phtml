@@ -1,0 +1,178 @@
+<script type="text/javascript" language="javascript">
+//<!CDATA[
+function g(o){return document.getElementById(o);}
+function HoverLi(n){
+//如果有N个标签,就将i<=N;
+//本功能非常OK,兼容IE7,FF,IE6
+	for(var i=1;i<=2;i++)
+	{
+		g('tb_'+i).className='tm2';
+		g('tbc_0'+i).style.display='none';
+	}
+	g('tbc_0'+n).style.display='block';
+	g('tb_'+n).className='tm1';
+}
+</script>
+<script type="text/javascript">
+  jQuery(function($){
+  jQuery(".bcxx a").click(function(){
+    x:HoverLi(2);
+  });
+  });
+</script>  
+<div class="login_page"> 
+<div class="azfzsc_title">
+  <a href="<?php echo $this->getUrl('') ?>">
+    <img alt="" src="<?php echo $this->getSkinUrl('images/logo.png')?>" />
+  </a>
+</div>
+<div class="azfzsc_nr">
+<div class="wb_top">
+<div class="wb_welcome"><span class="nhwb">您好<?php echo Mage::getSingleton('core/session')->getWeiboName();?>！欢迎来到忻兰商城！</span></div>
+<div class="wb_title">
+  <ul>
+    <li onMouseover="x:HoverLi(1);" id="tb_1" class="tm1">完善信息</li>
+    <li onMouseover="x:HoverLi(2);" id="tb_2" class="tm2">绑定已有账户</li>
+  </ul>
+</div>
+</div>  
+<div class="wb_list">   
+<div class="weibo_register" id="tbc_01" style="display: block;">    
+<div class="bcxx">请先补充这些信息，以便您更方便地登录忻兰商城！若已有忻兰商城账号，可以选择绑定您的忻兰商城账号。</div>                                                             
+  <form id="form-validate" method="post" action="<?php echo $this->getUrl();?>customer/account/createpost/">             
+    <div class="fieldset">                   
+      <input type="hidden" value="" name="success_url">                   
+      <input type="hidden" value="" name="error_url">                         
+      <ul class="form-list">                         
+        <li class="fields">                               
+          <div class="customer-name">                 
+            <div class="field username">                       
+              <label class="required" for="username">              用户名：               
+              </label>                       
+              <div class="input-box">       
+                <input type="text" class="input-text required-entry validate-name" title="User Name" value="<?php echo Mage::getSingleton('core/session')->getWeiboName();?>" name="username" id="username">                       
+              </div>     
+              <div class="note">请填写2-16个字符，不能使用特殊符号。</div>                   
+            </div> 
+                   
+          </div>                         
+        </li>                         
+        <li>                             
+        <label class="required" for="email_address">          
+        邮箱：         
+        </label>                             
+        <div class="input-box">                                   
+          <input type="text" class="input-text validate-email required-entry" title="Email Address" value="" id="email_address" name="email">                             
+        </div> 
+        
+         <div class="note">请填写有效的Email地址。</div>                        
+        </li>                                                                                                                                          
+      </ul>             
+    </div>                 
+    <div class="fieldset">                                  
+      <ul class="form-list">                         
+        <li class="fields">                               
+          <div class="field">                                     
+            <label class="required" for="password">              
+             登录密码：        
+            </label>                                     
+            <div class="input-box">                                           
+              <input type="password" class="input-text required-entry validate-password" title="Password" id="password" name="password">                                     
+            </div>  
+            <div class="note">密码请设为6-30位字符，请正确填写。</div>                             
+          </div>                               
+          <div class="field" style="margin:25px 0 20px 0">                                     
+            <label class="required" for="confirmation">              
+              确认密码：            
+            </label>                                     
+            <div class="input-box">                                           
+              <input type="password" class="input-text required-entry validate-cpassword" id="confirmation" title="Confirm Password" name="confirmation">                                     
+            </div>  
+            <div class="note">两次输入的密码要一致。</div>                            
+          </div> 
+          <div class="field"> 
+<label for="password" class="required">&nbsp;     
+            </label>
+            <div class="input-box">    
+              <input type="checkbox" style="margin-top:-2px ! important;margin-top:-3px;border:0 none" class="required-entry">&nbsp; 我已阅读并同意<span class="azxy"><a href="#">《忻兰商城服务协议》</a></span>
+            </div>
+          </div>                       
+        </li>                   
+      </ul> 
+      <input type="hidden" name="weibo_id" value="<?php echo Mage::getSingleton('core/session')->getWeiboId();?>">            
+    </div>            
+    <div class="buttons-set">    
+      <button class="button tjzc" title="提交注册" type="submit">
+        <span>
+          <span>提交注册</span> 
+        </span>       
+      </button>             
+    </div>       
+  </form>
+  <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        <?php if($this->getShowAddressFields()): ?>
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        <?php endif; ?>
+    //]]>
+    </script>                                              
+</div>                                              
+<div class="weibo_login" id="tbc_02" style="display:none;">  
+<div class="bcxx">已有忻兰商城账？请在这里忻兰商城账号：</div>   
+  <form id="login-form" method="post" action="<?php echo $this->getUrl();?>customer/account/loginPost/">        
+    <div class="col2-set">            
+      <div class="col-2 registered-users">                
+        <div class="content">                   
+          <ul class="form-list">                        
+            <li>                            
+            <label class="required" for="email">
+              用户名
+            </label>                            
+            <div class="input-box">                                
+              <input type="text" title="Email Address" class="input-text required-entry validate-email" id="email" value="" name="login[username]">                            
+            </div>                        
+            </li>                        
+            <li>                            
+            <label class="required" for="pass">
+              登录密码
+            </label>                            
+            <div class="input-box">                                
+              <input type="password" title="Password" id="pass" class="input-text required-entry validate-password" name="login[password]">                            
+            </div>                        
+            </li>                    
+          </ul>                  
+        </div>            
+      </div> 
+      <input type="hidden" name="weibo_id" value="<?php echo Mage::getSingleton('core/session')->getWeiboId();?>">         
+    </div>        
+    <div class="col2-set">              
+      <div class="col-2 registered-users">                
+        <div class="buttons-set">                                         
+          <button id="send2" name="send" title="绑定" class="button bd_btn" type="submit">
+            <span>
+              <span>绑定</span>
+            </span>
+          </button>                             
+        </div>            
+      </div>        
+    </div>    
+  </form>
+  <script type="text/javascript">
+  jQuery(function($){   
+    $("input[name='username']").blur(function(){ 
+      var userName=$(this).val(); 
+        $("input[name='firstname']").val(userName.substring(0,1));
+        $("input[name='lastname']").val(userName.substring(1,userName.length));   
+    })
+  })
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+</script>
+</div>
+</div>
+</div>
+</div>

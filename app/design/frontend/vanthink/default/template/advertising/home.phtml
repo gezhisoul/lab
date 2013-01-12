@@ -1,0 +1,38 @@
+
+<?php if (Mage::getStoreConfig('advertising/home/enabled')) :?>
+
+
+       
+       <div class="index_focus_box ftl" id="index_focus_box" >
+    <?php $num=0;?>
+    <?php for ($i = 1; $i <= 5; $i++){?>
+    <?php if(Mage::getStoreConfig('advertising/home/File'.$i)):?>
+        <?php $num++;?>
+		<div class="img dpn">
+		<a title="<?php echo Mage::getStoreConfig('advertising/home/TITLE'.$i);?>" target="_blank" href="<?php echo Mage::getStoreConfig('advertising/home/URL'.$i);?>">
+		<img alt="<?php echo Mage::getStoreConfig('advertising/home/TITLE'.$i);?>"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'catalog/product/tab/'.Mage::getStoreConfig('advertising/home/File'.$i);?>"/></a>
+		</div>
+		<?php endif;?>
+    	<?php }?>
+		<ul class="panel" id="index_focus_txt_bg">
+		<?php for ($i = 1; $i <= $num; $i++){?>
+		<li class=""/>
+		<?php }?>
+	
+	</ul>
+	<ul class="title" id="index_focus_txt">
+	<?php for ($i = 1; $i <= 5; $i++){?>
+    <?php if(Mage::getStoreConfig('advertising/home/File'.$i)):?>
+				<li><a title="<?php echo Mage::getStoreConfig('advertising/home/TITLE'.$i);?>" target="_blank" href="<?php echo Mage::getStoreConfig('advertising/home/URL'.$i);?>"><?php echo Mage::getStoreConfig('advertising/home/TITLE'.$i);?></a></li>
+				<?php endif;?>
+    	<?php }?>
+			
+			</ul>
+	<div class="loding" id="index_focus_loding"/>
+</div></div>
+
+
+
+<?php endif?>
+<!--以上为调用范例 -->
+

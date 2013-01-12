@@ -1,0 +1,142 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+
+$unorders = Mage::getResourceModel('sales/order_collection')
+            ->addAttributeToSelect('*')
+            ->joinAttribute('shipping_firstname', 'order_address/firstname', 'shipping_address_id', null, 'left')
+            ->joinAttribute('shipping_lastname', 'order_address/lastname', 'shipping_address_id', null, 'left')
+            ->addAttributeToFilter('customer_id', $customerId)
+            ->addAttributeToFilter('status', array('in' => array('pending', 'processing', 'holded', 'sending', 'order_confirm', 'wait_seller_send_goods')))
+            ->addAttributeToSort('created_at', 'desc')
+            ->load();
+
+$orders = Mage::getResourceModel('sales/order_collection')
+            ->addAttributeToSelect('*')
+            ->joinAttribute('shipping_firstname', 'order_address/firstname', 'shipping_address_id', null, 'left')
+            ->joinAttribute('shipping_lastname', 'order_address/lastname', 'shipping_address_id', null, 'left')
+            ->addAttributeToFilter('customer_id', $customerId)
+            ->addAttributeToFilter('status', array('in' => array('complete', 'closed', 'canceled')))
+            ->addAttributeToSort('created_at', 'desc')
+            ->load();
+
+$read = Mage::getSingleton('core/resource')->getConnection('core_read');
+$query = $read->query("select * from review_yes where customer_id = '".$customerId."' and r_status = 1 order by id desc");
+$reviews = $query->fetchAll();
+
+$coupons = Mage::getResourceModel('coupon/coupon_collection')->addFieldToFilter('yonghu', $customerId);
+
+?>
+<script type="text/javascript">
+// <![CDATA[
+    function setTab(name,cursel,n){
+        for(i=1;i<=n;i++){
+            var menu=document.getElementById(name+i);
+            var con=document.getElementById("cons_"+name+"_"+i);
+            menu.className=i==cursel?"hover":"";
+            con.style.display=i==cursel?"block":"none";
+        }
+    }
+// ]]>
+</script>
+
+<style type="text/css" media="screen">
+  .order_list {
+    min-height:211px;
+    height:auto !important;
+    height:211px;
+    overflow:visible;
+  }
+</style>
+<div class="dashboard mb10">
+    <div class="page-title">
+        <h1><?php echo $this->__('My Dashboard') ?></h1>
+    </div>
+    <div class="account_layout accout_dashboard">
+      <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+      <?php echo $this->getChildHtml('hello') ?>
+      <?php // echo $this->getChildHtml('top') ?>
+      <!-- add by wangxianbin@vanthink.net 带有tab的订单列表 -->
+      <div class="account_order">
+        <div class="order_title">
+          <ul>
+            <li onmouseover="setTab('order',1,4)" id="order1" class="hover">未完成订单<span>(<?php echo count($unorders); ?>)</span></li>
+            <li onmouseover="setTab('order',2,4)" id="order2" class="">已完成订单<span>(<?php echo count($orders); ?>)</span></li>
+            <li onmouseover="setTab('order',3,4)" id="order3" class="">我的优惠券<span>(<?php echo count($coupons); ?>)</span></li>
+            <li onmouseover="setTab('order',4,4)" id="order4" class="">已评论商品</li>
+          </ul>
+        </div>
+        <div class="order_list">
+          <div class="hover" id="cons_order_1" style="display: block;">
+            <?php echo $this->getChildHtml('top') ?>
+          </div>
+          <div style="display: none;" id="cons_order_2">
+            <?php echo $this->getChildHtml('customer_account_dashboard_complete') ?>
+          </div>
+          <div style="display: none;" id="cons_order_3">
+            <?php echo $this->getChildHtml('dashboard_coupon') ?>
+          </div>
+          <div style="display: none;" id="cons_order_4">
+            <?php print $this->getChildHtml('dashboard_review') ?>
+            <?php // echo $this->getChildHtml('info1') ?>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-account box-info">
+              <div class="box-head">
+                <h2><?php echo $this->__('Account Information') ?></h2>
+              </div>
+              <?php echo $this->getChildHtml('info') ?>
+              <?php echo $this->getChildHtml('address') ?>
+      </div>
+
+      <?php echo $this->getChildHtml('recommend_products') ?>
+      <?php echo $this->getChildHtml('dashboard_hotsell') ?>
+<!--      <div class="hotSale">
+        <div class="memberTitle">忻兰热销推荐</div>
+        <ul>
+          <li><a href="#"><img src=<?php print $this->getSkinUrl()."images/hotSale.gif"?>  alt="" /></a></li>
+          <li><a href="#"><img src=<?php print $this->getSkinUrl()."images/hotSale.gif"?>  alt="" /></a></li>
+          <li class="laster"><a href="#"><img src=<?php print $this->getSkinUrl()."images/hotSale.gif"?>  alt="" /></a></li>
+      </div> -->
+    </div>
+</div>
+<script type="text/javascript">
+ function g(o){return document.getElementById(o);}
+function HoverLi(n){
+  for(var i=1;i<=2;i++)
+  {
+    g('tb_'+i).className='tm2';
+    g('tbc_0'+i).style.display='none';
+  }
+  g('tbc_0'+n).style.display='block';
+  g('tb_'+n).className='hover';
+}
+
+</script>
+

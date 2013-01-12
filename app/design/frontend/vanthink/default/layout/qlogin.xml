@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <qlogin_index_notify>		
+              <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>	
+        <reference name="content">
+            <block type="core/template" name="q_blind" template="qlogin/blind.phtml" />
+        </reference>
+    </qlogin_index_notify>
+
+</layout>

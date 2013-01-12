@@ -1,0 +1,228 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Edit customer address template
+ *
+ * @see Mage_Customer_Block_Address_Edit
+ */
+?>
+<?php if($this->getTitle()): ?>
+<div class="page-title">
+    <h1><?php echo $this->getTitle() ?></h1>
+</div>
+<?php endif; ?>                
+
+<script type="text/javascript">
+(function($) {
+  $.fn.emptySelect = function() {
+    return this.each(function(){
+      if (this.tagName=='SELECT') this.options.length = 0;
+    });
+  }
+  $.fn.loadSelect = function(optionsDataArray) {
+    return this.emptySelect().each(function(){
+      if (this.tagName=='SELECT') {
+        var selectElement = this;
+        $.each(optionsDataArray,function(index,optionData){
+          var option = new Option(optionData.caption,
+                                  optionData.caption);
+           option.className=optionData.value;                       
+          if ($.browser.msie) {
+            selectElement.add(option);
+          }
+          else {
+            selectElement.add(option,null);
+          }
+        });
+      }
+    });
+  }
+})(jQuery);
+jQuery(function(){
+    jQuery("#region_id").change(function(){
+        selectbillcity();
+    });
+    jQuery("#city").change(function(){
+        selectbilldistrict();
+    });
+    var city1 = "<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>";
+    var city2 = "<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>";
+    if(!city1=='' && !city2=='' )
+    {
+      jQuery("#city").append("<option value='"+city1+"'>"+city1+"</option>");
+      jQuery("#district").append("<option value='"+city2+"'>"+city2+"</option>");
+      jQuery("#city")[0].selectedIndex = 1;
+      jQuery("#district")[0].selectedIndex = 1;
+    }    
+});
+function selectbillcity() {    
+		var region_value = jQuery("#region_id option:selected").val();   
+    var city =  jQuery("#city");
+    jQuery.getJSON(
+     "<?php echo $this->getUrl().'cascade/index/getcity'; ?>",
+     {region_id:region_value},
+     function(data){
+        city.loadSelect(data);
+        selectbilldistrict();
+        //console.dir(data);
+     }
+  );  
+}
+function selectbilldistrict() {    
+		var city_value =   jQuery("#city option:selected").attr("class");
+    var district =  jQuery("#district");
+    jQuery.getJSON(
+     "<?php echo $this->getUrl().'cascade/index/getdistrict'; ?>",
+     {city_id:city_value},
+     function(data){
+        district.loadSelect(data);
+       // console.dir(data);
+     }
+  );  
+}
+function selectdistrict() {
+     var district_value = jQuery("#district option:selected").val();
+     jQuery("#street_1").val(district_value);
+   //  var postcode = jQuery("#billing\\:district option:selected").attr("class"); 
+   //  jQuery("#billing\\:postcode").val(postcode);
+} 
+</script> 
+<div class="account_layout">                              
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate">
+    <div class="fieldset">
+    <?php echo $this->getBlockHtml('formkey')?>
+    <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+    <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+        <ul class="form-list">
+            <li class="fields cf">
+                <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getCustomer())->toHtml() ?>
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <label for="telephone" class="required"><span class="xinghao">*</span><?php echo $this->__('Telephone') ?>：</label>
+                    <div class="input-box">
+                        <input type="text" name="telephone" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="telephone" />
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <ul class="form-list">
+            <li class="fields cf">
+                <div class="field fl" style="width:243px;">
+                    <label for="region_id" class="required"><span class="xinghao">*</span><?php echo $this->__('State/Province') ?>：</label>
+                    <div class="input-box">
+                        <select id="region_id" name="region_id"  title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                           <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                        </select>
+                        <script type="text/javascript">
+                        //<![CDATA[
+                            $('region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+                        //]]>
+                        </script>
+                        <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                    </div>
+                </div>
+                
+                <div class="input-box fl" style="width:210px;">             
+                    <label for="city" class="required"><span class="xinghao">*</span><?php echo $this->__('City') ?>：</label>
+                    <select  title="<?php echo $this->__('City') ?>" name="city"  class="required-entry cityoption" id="city" >             
+                      <option value="">
+                      <?php echo $this->__('Please select city') ?>
+                      </option>
+                                
+                    </select>         
+                </div>
+
+                
+                <div class="input-box fl">            
+                    <label for="district" class="required"><span class="xinghao">*</span><?php echo $this->__('县/区') ?>：</label>    
+                    <select  title="<?php echo $this->__('县/区') ?>" name="district" class="required-entry cityoption" id="district" >
+                      <option value="">
+                      <?php echo $this->__('请选择县/区') ?>
+                      </option>
+                    </select>        
+                </div>
+            </li>  
+            
+            <li class="wide cf">
+                <label for="street_1" class="required"><span class="xinghao">*</span><?php echo $this->__('Street Address') ?>：</label>
+                <div class="input-box">
+                    <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text required-entry" />
+                </div>
+            </li>
+
+            <li class="fields mt10">
+                <div class="field">
+                    <label for="zip" class="required"><span class="xinghao">*</span><?php echo $this->__('Zip/Postal Code') ?>：</label>
+                    <div class="input-box">
+                        <input type="text" name="postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international required-entry" />
+                    </div>
+                </div>
+                <div class="field" style="display:none">
+                    <label for="country" class="required"><span class="xinghao">*</span><?php echo $this->__('Country') ?>：</label>
+                    <div class="input-box">
+                        <?php echo $this->getCountryHtmlSelect() ?>
+                    </div>
+                </div>
+            </li>
+            <li<?php if($this->canSetAsDefaultBilling()) echo ' class="control"' ?>>
+                <?php if($this->isDefaultBilling()): ?>
+                    <strong>默认地址</strong>
+                <?php elseif($this->canSetAsDefaultBilling()): ?>
+                    <input type="checkbox" id="primary_billing" name="default_billing" value="1" title="<?php echo $this->__('Use as My Default Billing Address') ?>" class="checkbox" /><label for="primary_billing">设置为我的默认地址</label>
+                <?php else: ?>
+                    <input type="hidden" name="default_billing" value="1" />
+                <?php endif; ?>
+            </li>
+            <li<?php if($this->canSetAsDefaultShipping()) echo ' class="control"' ?>>
+                <?php if($this->isDefaultShipping()): ?>
+                    
+                <?php elseif($this->canSetAsDefaultShipping()): ?>
+                    
+                <?php else: ?>
+                    <input type="hidden" name="default_shipping" value="1" />
+                <?php endif; ?>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+      <button type="submit" title="<?php echo $this->__('Save Address') ?>" class="button save_btn">保存</button>
+    </div> 
+    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        
+</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+//]]>
+</script>

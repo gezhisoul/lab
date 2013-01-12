@@ -1,0 +1,119 @@
+<?php
+   /**
+   * Magento
+   *
+   * NOTICE OF LICENSE
+   *
+   * This source file is subject to the Academic Free License (AFL 3.0)
+   * that is bundled with this package in the file LICENSE_AFL.txt.
+   * It is also available through the world-wide-web at this URL:
+   * http://opensource.org/licenses/afl-3.0.php
+   * If you did not receive a copy of the license and are unable to
+   * obtain it through the world-wide-web, please send an email
+   * to license@magentocommerce.com so we can send you a copy immediately.
+   *
+   * DISCLAIMER
+   *
+   * Do not edit or add to this file if you wish to upgrade Magento to newer
+   * versions in the future. If you wish to customize Magento for your
+   * needs please refer to http://www.magentocommerce.com for more information.
+   *
+   * @category    design
+   * @package     base_default
+   * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+   * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+   */
+   ?>
+<div class="box-account box-recent">
+  <?php $_orders = $this->getOrders(); ?>
+  <?php if( sizeof($_orders->getItems()) > 0 ): ?>
+  <table class="data-table" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+      <tr>
+        <th><?php echo $this->__('订单编号') ?></th>
+        <th><?php echo $this->__('下单时间') ?></th>
+        <th><?php echo $this->__('订单状态') ?></th>
+        <th><span class="nobr"><?php echo $this->__('订单金额') ?></span></th>
+        <th><?php echo $this->__('商品数量') ?></th>
+        <th><?php echo $this->__('操作') ?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($_orders as $_order): ?>
+      <?php $num = 0; ?>
+      <?php foreach ($_order->getAllItems() as $item): ?>
+      <?php $num += number_format($item->getQtyOrdered()); ?>
+      <?php endforeach; ?>
+      <tr>
+        <td>
+          <?php echo $_order->getRealOrderId() ?>
+          <?php $items = $_order->getAllItems(); ?>
+          <div class="order_pic">
+            <?php foreach ($items as $itemId => $item): ?>
+            <?php if ($itemId < 3): ?>
+                  <?php $_product = Mage::getModel('catalog/product')->load($item->getProductId()) ?>
+                  <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(36); ?>" />
+                  <?php endif; ?>
+                  <?php endforeach; ?>
+          </div>
+        </td>
+        <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+        <td><em><?php echo $_order->getStatusLabel() ?></em></td>
+        <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+        <td><?php echo $num; ?></td>
+        <td class="a-center">
+          <span class="nobr">
+            <a href="<?php echo $this->getViewUrl($_order) ?>">查看</a>
+            <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+            <span class="separator"></span> <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+            <?php endif ?>
+            <!--Alex 后支付入口 -->
+            <?php $paymentmethod=$_order->getPayment()->getMethodInstance()->getCode();?>
+            <?php if($_order->getStatus()=='pending'):?>
+            <?php if($paymentmethod=='alipay_payment'):?>
+            <span class="separator"></span><a onclick="this.target='_blank'" style="margin-left:5px;" href="<?php echo $this->getUrl('alipay/payment/pay').'?orderid='.$_order->getRealOrderId(); ?>">支付</a>
+            <?php elseif($paymentmethod=='tenpay_payment'): ?>
+            <span class="separator"></span><a onclick="this.target='_blank'" style="margin-left:5px;" href="<?php echo $this->getUrl('tenpay/payment/pay').'?orderid='.$_order->getRealOrderId(); ?>">支付</a>
+            <?php elseif($paymentmethod=='consumerpay_payment'): ?>
+            <span class="separator"></span><a onclick="this.target='_blank'" style="margin-left:5px;" href="<?php echo $this->getUrl('consumerpay/payment/pay').'?orderid='.$_order->getRealOrderId(); ?>">支付</a>
+            <?php endif; ?>
+            <?php elseif($_order->getStatus()=='alipay_wait_buyer_pay'): ?>
+            <span class="separator"></span><a onclick="this.target='_blank'" style="margin-left:5px;" href=" https://www.alipay.com/user/login.htm">支付</a>
+            <?php elseif(($_order->getStatus() == 'wait_seller_send_goods') || ($_order->getStatus() == 'sending') || ($_order->getStatus() == 'complete')): ?>
+            <span class="separator"></span><a onclick="this.target='_blank'" style="margin-left:5px;" href="<?php echo $this->getUrl('sales/order/inquire').'?orderid='.$_order->getRealOrderId(); ?>"><?php echo $this->__('物流') ?></a>
+            <?php endif; ?>
+          </span>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  <div class="all_orders"><a href="<?php echo $this->getUrl('sales/order/history');?>
+                                   ">+ 浏览全部订单</a></div>
+  <script type="text/javascript">decorateTable('my-orders-table')</script>
+  <?php else: ?>
+    <div class="noInfo">
+    暂无数据
+</div>
+  <?php endif; ?>
+</div>
+
+
+
+<script type="text/javascript">// <![CDATA[
+function setTab(name,cursel,n){
+for(i=1;i<=n;i++){
+var menu=document.getElementById(name+i);
+var con=document.getElementById("cons_"+name+"_"+i);
+menu.className=i==cursel?"hover":"";
+con.style.display=i==cursel?"block":"none";
+}
+}
+// ]]>
+</script>

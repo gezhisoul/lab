@@ -1,0 +1,83 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="box-account box-recent">
+  <?php $_orders = $this->getOrders(); ?>
+  <?php if( sizeof($_orders->getItems()) > 0 ): ?>
+  <table class="data-table" id="my-orders-table">
+        <thead>
+      <tr>
+        <th  colspan="1"><?php echo $this->__('Order #') ?></th>
+        <th><?php echo $this->__('Date') ?></th>
+        <th><?php echo $this->__('Ship To') ?></th>
+        <th><?php echo $this->__('Order Total') ?></th>
+        <th><?php echo $this->__('Status') ?></th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($_orders as $_order): ?>
+      <tr>
+        <td><?php echo $_order->getRealOrderId() ?></td>
+        <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+        <td><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+        <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+        <td><?php echo $_order->getStatusLabel() ?></td>
+        <td class="a-center">
+         
+            <a class="back_bg" href="<?php echo $this->getViewUrl($_order) ?>">查看</a>
+            <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+            <a class="back_bg" href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+            <?php endif ?>
+            <!--Alex 后支付入口 -->
+            <?php $paymentmethod=$_order->getPayment()->getMethodInstance()->getCode();?>
+            <?php if($_order->getStatus()=='pending'):?>
+              <?php if($paymentmethod=='alipay_payment'):?>
+                <a class="red_bg" onclick="this.target='_blank'" style="margin-left:5px;" href="<?php echo $this->getUrl('alipay/payment/pay').'?orderid='.$_order->getRealOrderId(); ?>">支付</a>
+              <?php elseif($paymentmethod=='tenpay_payment'): ?>
+                <a class="red_bg" onclick="this.target='_blank'" style="margin-left:5px;" href="<?php echo $this->getUrl('tenpay/payment/pay').'?orderid='.$_order->getRealOrderId(); ?>">支付</a>
+              <?php endif; ?>
+            <?php elseif($_order->getStatus()=='alipay_wait_buyer_pay'): ?>
+              <a class="red_bg" onclick="this.target='_blank'" style="margin-left:5px;" href=" https://www.alipay.com/user/login.htm">支付</a>
+            <?php endif; ?>
+            <?php if(in_array($_order->getStatus(), array('pending', 'wait_seller_send_goods', 'alipay_wait_buyer_pay'))):?>
+              <a class="back_bg" onclick="return confirm('确定要取消该订单？')" style="margin-left:5px;" href="<?php echo $this->getUrl('fanxiang_wensli/order/cancel').'?orderid='.$_order->getRealOrderId(); ?>"><?php echo $this->__('取消') ?></a>
+            <?php endif?>
+        
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <div class="box-head ck_more">
+    <?php if( sizeof($_orders->getItems()) > 0 ): ?><a href="<?php echo $this->getUrl('sales/order/history') ?>"><?php echo $this->__('View All') ?></a><?php endif; ?>
+  </div>
+  <script type="text/javascript">decorateTable('my-orders-table')</script>
+  <?php else: ?>
+  <div class="noInfo"><?php echo $this->__('暂无数据'); ?></div>
+  <?php endif; ?>
+</div>

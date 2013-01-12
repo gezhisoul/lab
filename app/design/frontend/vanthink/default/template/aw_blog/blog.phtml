@@ -1,0 +1,19 @@
+<div class="newspage">
+  <div class="news_title"><h3>网站公告</h3></div>
+  <?php $posts = $this->getPosts(); ?>
+  <ul class="newspost">
+    <?php foreach ($posts as $key=>$post): ?>
+    <?php if ($key % 2 == 0):?>
+    <li class="even">
+      <?php else:?>
+    <li class="point">
+      <?php endif;?>
+      <a href="<?php echo $post->getAddress(); ?>">
+        <div class="newsTitle"><?php echo $post->getTitle();?></div>
+        <div class="newsTime"><?php echo $post->getCreatedTime(); ?></div>
+      </a>
+    </li>
+    <?php endforeach; ?>
+  </ul>
+  <?php $this->getPages(); ?>
+</div>

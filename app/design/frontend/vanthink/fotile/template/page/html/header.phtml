@@ -1,0 +1,699 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<article>
+    <div id="header">
+    <div class="normal cf top">
+        <section>
+            <ul class="hello posr micya">
+                <li class="register">您好，欢迎来到方太官方商城！</li>
+                <?php if(Mage::getSingleton('customer/session')->isLoggedIn()):?>
+                <li class="register"><a class="coyel" href="<?php echo $this->getUrl('sales/order/history');?>">我的账户</a><strong class="coyel posr">|</strong></li>
+
+                <li class="login"><a class="coyel" href="<?php echo $this->getUrl('customer/account/logout');?>">退出</a></li>
+                <?php else:?>
+                <li class="register"><a class="coyel" href="<?php echo $this->getBaseUrl() ?>customer/account/create">注册</a><strong class="coyel posr">|</strong></li>
+                <li class="login"><a class="coyel" href="<?php echo $this->getBaseUrl() ?>customer/account/login">登录</a></li>
+                <?php endif?>
+<!--                <li class="posr">
+                    <a href="#">
+                        <img src="<?php print $this->getSkinUrl();?>/images/otherlogin.png" alt="" width="19" height="19" /></a><b></b>
+                        <div class="otherlogin" id="otherlogin">
+                            <dl>
+                                <dd>
+                            <a href="#" class="sina"></a></dd>
+                            <dd>
+                            <a href="#" class="alipay"></a>
+                            </dd>
+                            </dl>
+                        </div>
+                </li>
+                <li class="posr curp">
+                    我的方太 <b></b>
+                    <dl class="otherlogin" id="my-info">
+                        <dd><a href="#">我的订单</a></dd>
+                        <dd><a href="#">ming</a></dd>
+                        <dd><a href="#">song</a></dd>
+                    </dl>
+                </li> -->
+                <li class="nopa posr"><span>服务热线</span>&nbsp;&nbsp;&nbsp;<span class="coyel">4000-315-315</span></li>
+            </ul>
+            <div class="search-area">
+          <?php echo $this->getChildHtml('topSearch') ?>
+          <?php echo $this->getChildHtml('topContainer'); ?>
+          <?php echo $this->getChildHtml('seo.searchterm') ?>
+            </div>
+        </section>
+        <header>
+            <h1><a href="/index.php">
+                <img src="<?php print $this->getSkinUrl();?>/images/logo.png" alt="方太官方商城" />
+                </a>
+            </h1>
+        </header>
+    </div>
+    <nav>
+        <div class="bill cf posr">
+           <?php echo $this->getChildHtml('cart_sidebar_mini') ?> 
+           
+        </div>
+    
+<ul class="nav cf posr">
+            <li class="nav-first">
+                <a href="/index.php" title="主页">
+                主页
+                </a>
+            </li>
+            <li class="nav2 words3">
+                <a href="/youyanji.html">油烟机</a>
+                <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">油烟机系列</a>
+                            </dt>
+                            <dd>
+                                <a href="#">高效静吸</a>
+                            </dd>
+                            <dd>
+                                <a href="#">风魔方</a>
+                            </dd>
+                            <dd>
+                                <a href="#">后免拆洗</a>
+                            </dd>
+                            <dd>
+                                <a href="#">典爱世纪</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">适合装修风格</a>
+                            </dt>
+                            <dd>
+                                <a href="#">欧式简约</a>
+                            </dd>
+                            <dd>
+                                <a href="#">开放式</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">适合厨房面积</a>
+                            </dt>
+                            <dd>
+                                <a href="#">3-5平方</a>
+                            </dd>
+                            <dd>
+                                <a href="#">5-7平方</a>
+                            </dd>
+                            <dd>
+                                <a href="#">7-9平方</a>
+                            </dd>
+                            <dd>
+                                <a href="#">10平方以上</a>
+                            </dd>
+                        </dl>
+                        <dl class="menu-color">
+                            <dt>
+                                <a href="#">颜色</a>
+                            </dt>
+                            <dd>
+                                <a href="#">银灰色</a>
+                            </dd>
+                            <dd>
+                                <a href="#">白色</a>
+                            </dd>
+                            <dd>
+                                <a href="#">深咖啡</a>
+                            </dd>
+                            <dd>
+                                <a href="#">黑色</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">陶瓷</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">安装位置</a>
+                            </dt>
+                            <dd>
+                                <a href="#">顶吸</a>
+                            </dd>
+                            <dd>
+                                <a href="#">侧吸</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropdown-img noback"><a href="#">
+                        <img src="/media/menu-product.png" alt="" />
+                    </a></section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav3 words3">
+                <a href="/ranqizao.html">燃气灶</a>
+                <div class="drop-down">
+                   <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">气源</a>
+                            </dt>
+                            <dd>
+                                <a href="#">天然气12T</a>
+                            </dd>
+                            <dd>
+                                <a href="#">液化气20Y</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">陶瓷</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">灶眼类型</a>
+                            </dt>
+                            <dd>
+                                <a href="#">单眼灶</a>
+                            </dd>
+                            <dd>
+                                <a href="#">多眼灶</a>
+                            </dd>
+                            <dd>
+                                <a href="#">三眼灶</a>
+                            </dd>
+                            <dd>
+                                <a href="#">双眼灶</a>
+                            </dd>
+                            <dd>
+                                <a href="#">电磁灶</a>
+                            </dd>
+                            <dd>
+                                <a href="#">气电两用</a>
+                            </dd>
+                        </dl>
+                        
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">挖孔尺寸</a>
+                            </dt>
+                            <dd>
+                                <a href="#">708×388</a>
+                            </dd>
+                            <dd>
+                                <a href="#">775×390</a>
+                            </dd>
+                            <dd>
+                                <a href="#">660×360</a>
+                            </dd>
+                            <dd>
+                                <a href="#">280×460</a>
+                            </dd>
+                            <dd>
+                                <a href="#">650×366</a>
+                            </dd>
+                        </dl>  
+                    </section>
+                    <section class="dropdown-img">
+                        <a href="#"></a>
+                        <img src="/media/menu-ranqizao.png" alt="" />
+                        </a>
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav4 words2">
+                <a href="/zhengxiang.html">蒸箱</a>
+                <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">按键类型</a>
+                            </dt>
+                            <dd>
+                                <a href="#">触摸式</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                            <dd>
+                                <a href="#">不锈钢+钢化玻璃</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropdown-img dropThree noback">
+                        <img src="/media/menu-zhengxiang1.png" alt="">
+                    </section>
+                    <section class="dropdown-img dropThree noback">
+                        <a href="#"></a>
+                        <img src="/media/menu-zhengxiang2.png" alt="" />
+                        </a>
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav5 words2">
+                <a href="/kaoxiang.html">烤箱</a>
+                <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">款式</a>
+                            </dt>
+                            <dd>
+                                <a href="#">台式</a>
+                            </dd>
+                            <dd>
+                                <a href="#">卧式</a>
+                            </dd>
+                            <dd>
+                                <a href="#">嵌入式</a>
+                            </dd>
+                            
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                            <dd>
+                                <a href="#">不锈钢+钢化玻璃</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropdown-img dropThree">
+                        <img src="/media/menu-kaoxiang1.png" alt="">
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">开孔尺寸</a>
+                            </dt>
+                            <dd>
+                                <a href="#">宽560×高590×深550</a>
+                            </dd>
+                            <dd>
+                                <a href="#">宽560×高450×深550</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropdown-img dropThree noback">
+                        <img src="/media/menu-kaoxiang2.png" alt="">
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav6 words3">
+                <a href="/weibolu.html">微波炉</a>
+                <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">额定输入功率</a>
+                            </dt>
+                            <dd>
+                                <a href="#">微波1300W</a>
+                            </dd>
+                            <dd>
+                                <a href="#">微波1300W和烧烤850W</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                            <dd>
+                                <a href="#">不锈钢+钢化玻璃</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="w130">
+                        <dl>
+                            <dt>
+                                <a href="#">加热方式</a>
+                            </dt>
+                            <dd>
+                                <a href="#">微波</a>
+                            </dd>
+                            <dd>
+                                <a href="#">烧烤+微波</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">底盘类型</a>
+                            </dt>
+                            <dd>
+                                <a href="#">旋转</a>
+                            </dd>
+                            <dd>
+                                <a href="#">平板式</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropThree dropdown-img">
+                        <a href="#">
+                        <img src="/media/menu-weibolu1.png" alt="" />
+                        </a>
+                    </section>
+                    <section class="dropThree dropdown-img noback">
+                        <a href="#">
+                        <img src="/media/menu-weibolu2.png" alt="" />
+                        </a>
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav7 words3">
+                <a href="/xiaodugui.html">消毒柜</a>
+                <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">系列</a>
+                            </dt>
+                            <dd>
+                                <a href="#">U光源</a>
+                            </dd>
+                            <dd>
+                                <a href="#">负离子</a>
+                            </dd>
+                            <dd>
+                                <a href="#">自动感应</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                             <dd>
+                                <a href="#">不锈钢+钢化玻璃</a>
+                            </dd>
+                            <dd>
+                                <a href="#">镜面钢化玻璃</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">消毒方式</a>
+                            </dt>
+                            <dd>
+                                <a href="#">臭氧</a>
+                            </dd>
+                            <dd>
+                                <a href="#">负离子</a>
+                            </dd>
+                            <dd>
+                                <a href="#">自动感应</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropThree dropdown-img">
+                        <a href="#">
+                        <img src="/media/menu-xiaodugui1.png" alt="" />
+                        </a>
+                    </section>
+                    <section class="noback">
+                        <dl>
+                            <dt>
+                                <a href="#">烘干方式</a>
+                            </dt>
+                            <dd>
+                                <a href="#">负离子+PTC热风循环</a>
+                            </dd>
+                            <dd>
+                                <a href="#">PTC热风循环</a>
+                            </dd>
+                            <dd>
+                                <a href="#">石英管安全加热</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav8 words3"><a href="reshuiqi.html">热水器</a>
+                 <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">额度产热水能力</a>
+                            </dt>
+                            <dd>
+                                <a href="#">10L/min</a>
+                            </dd>
+                            <dd>
+                                <a href="#">11L/min</a>
+                            </dd>
+                            <dd>
+                                <a href="#">13L/min</a>
+                            </dd>
+                             <dd>
+                                <a href="#">16L/min</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">碳钢</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">气源</a>
+                            </dt>
+                            <dd>
+                                <a href="#">天然气12T</a>
+                            </dd>
+                            <dd>
+                                <a href="#">液化气20Y</a>
+                            </dd>
+                        </dl>
+                        <dl class="menu-color">
+                            <dt>
+                                <a href="#">容积</a>
+                            </dt>
+                            <dd>
+                                <a href="#">10L</a>
+                            </dd>
+                            <dd>
+                                <a href="#">11L</a>
+                            </dd>
+                            <dd>
+                                <a href="#">13L</a>
+                            </dd>
+                            <dd>
+                                <a href="#">16L</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="dropThree dropdown-img noback">
+                        <a href="#">
+                        <img src="/media/menu-reshuiqi1.png" alt="" />
+                        </a>
+                    </section>
+                    <section class="dropThree dropdown-img noback">
+                        <a href="#">
+                        <img src="/media/menu-reshuiqi2.png" alt="" />
+                        </a>
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav9"><a href="/yanzaotaozhuang.html">烟灶套装</a>
+                 <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dd>
+                                <a href="#">侧吸两件套</a>
+                            </dd>
+                            <dd>
+                                <a href="# style="display:block"">三件套</a>
+                            </dd>
+                            <dd>
+                                <a href="#">六件套</a>
+                            </dd>
+                        </dl>
+                        
+                    </section>
+                    <section class="dropThree dropdown-img noback">
+                         <img src="/media/menu-yztz1.png" alt="" />
+                    </section>
+                    <section class="dropThree dropdown-img">
+                         <img src="/media/menu-yztz2.png" alt="" />
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                </div>
+            </li>
+            <li class="nav10">
+                <a href="/mdsp.html/">门店商品</a>
+                <div class="drop-down">
+                    <section class="first-section">
+                        <dl>
+                            <dt>
+                                <a href="#">商品分类</a>
+                            </dt>
+                            <dd>
+                                <a href="#">全部</a>
+                            </dd>
+                            <dd>
+                                <a href="#">油烟机</a>
+                            </dd>
+                            <dd>
+                                <a href="#">蒸箱</a>
+                            </dd>
+                             <dd>
+                                <a href="#">烤箱</a>
+                            </dd>
+                            <dd>
+                                <a href="#">微波炉</a>
+                            </dd>
+                            <dd>
+                                <a href="#">热水器</a>
+                            </dd>
+                             <dd>
+                                <a href="#">烟灶套装</a>
+                            </dd>
+                        </dl>
+                        
+                    </section>
+                    <section>
+                        <dl>
+                            <dt>
+                                <a href="#">材质</a>
+                            </dt>
+                            <dd>
+                                <a href="#">不锈钢</a>
+                            </dd>
+                            <dd>
+                                <a href="#">航空铝材</a>
+                            </dd>
+                            <dd>
+                                <a href="#">涂层</a>
+                            </dd>
+                            <dd>
+                                <a href="#">钢化玻璃</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section class="noback">
+                        <dl>
+                            <dt>
+                                <a href="#">价格区间</a>
+                            </dt>
+                            <dd>
+                                <a href="#">1499-1999</a>
+                            </dd>
+                            <dd>
+                                <a href="#">2000-2999</a>
+                            </dd>
+                            <dd>
+                                <a href="#">3000-3999</a>
+                            </dd>
+                            <dd>
+                                <a href="#">4000以上</a>
+                            </dd>
+                        </dl>
+                    </section>
+                    <a href="#" class="findout">查看全部</a>
+                    <section class="dropThree dropdown-img noback">
+                         <img src="/media/menu-mdsp1.png" alt="" />
+                    </section>
+                </div>
+            </li>
+            <li class="nav11">
+                <a href="/specialTopic">专题活动</a>
+            </li>
+        </ul> 
+    </nav>
+    </div>
+</article>

@@ -1,0 +1,372 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+?>
+<div class="wrapper_border">
+  <div class="product-view">
+    <div class="product-essential fr">
+      <?php $enctype = ''?>
+      <?php if($_product->getOptions()):?>
+      <?php $enctype = 'enctype="multipart/form-data"'?>
+      <?php endif ?>
+      <form action="<?php echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form" <?php print $enctype?> >
+        <div>
+          <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+          </div>
+          <div class="product-shop">
+            <div class="product-name">
+              <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+            <div class="product-summary">
+              <?php echo $this->getChildHtml('alert_urls') ?>
+              <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+              <!--<style>
+                .deliveryArea select{
+                  width: 70px;
+                  margin: 0 6px;
+                }
+              </style>
+               <div class="deliveryArea">
+                <span>配送范围：</span><select><option>上海</option></select>省<select></select>市<select></select>
+              </div> -->
+              <?php echo $this->getChildHtml('extrahint') ?>
+              <div class="pro-ser"><label>服务：</label><span>由方太官方 发送并提供售后服务。</span></div>
+            </div>
+            <div class="tier-price">
+              <?php echo $this->getTierPriceHtml() ?>
+            </div>
+            <div class="product-type-data">
+              <?php echo $this->getChildHtml('product_type_data') ?>
+            </div>
+            <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+            <?php if ($alias <> 'description'): ?>
+            <div class="basicAttr cf mtb10">
+              <?php if ($title = $this->getChildData($alias, 'title')):?>
+              <h2><?php echo $this->escapeHtml($title); ?></h2>
+              <?php endif;?>
+              <?php echo $html; ?>
+            </div>
+            <?php endif;?>
+            <?php endforeach;?>
+            <?php if ($_product->getShortDescription()):?>
+            <div class="short-description">
+              <h2><?php echo $this->__('Quick Overview') ?></h2>
+              <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+            </div>
+            <?php endif;?>
+
+            <div class="container1">
+              <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+              <?php endif;?>
+            </div>
+
+            <div class="container2">
+              <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+              <?php endif;?>
+            </div>
+
+            <div class="about-products">
+              <?php if (!$this->hasOptions()):?>
+              <div class="add-to-box" <?php if (!$_product->isSaleable()) print 'style="display:none"'?>>
+                <?php if($_product->isSaleable()): ?>
+                <?php echo $this->getChildHtml('addtocart') ?>
+                <?php endif; ?>
+                <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                <div class="shoucang">
+                  <div class="pro-compare">
+                    <?php if($_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product) ): ?>
+                    <a href="<?php echo $_compareUrl ?>" class="link-compare">加入对比</a>
+                    <?php endif; ?>
+                  </div>
+                  <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist">
+                    <img src="<?php echo $this->getSkinUrl('images/add-wish.gif') ?>" alt="" class="fl" /></a>
+                  <?php echo $this->getChildHtml('addto') ?>
+                </div>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+              </div>
+              <?php else:?>
+                <?php echo $this->getChildHtml('addto') ?>
+              <?php endif; ?>
+
+              <div class="other-info">
+                <?php echo $this->getChildHtml('other');?>
+              </div>
+              <?php if(!$_product->isSaleable()): ?>
+              <div class="onlineConsult storeContect">
+                <span>在线咨询</span>
+                <a href="">方太1</a>
+                <a href="">方太2</a>
+                <a href="">方太3</a>
+                <a href="">方太4</a>
+              </div>
+              <div class="orderCall storeContect">
+                <span class="fl">电话订购</span><img class="fl" src="/media/storeCall.png" alt="" />
+              </div>
+            <div class="offline-product storeContect">
+              <a href="javascript:void(0);" class="offContect"></a>
+              <label>请填写您的联系信息，我们将第一时间联系您。</label>
+            </div>
+            <?php endif ?>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="media-box">
+      <div class="product-img-box cf">
+        <?php echo $this->getChildHtml('media') ?>
+      </div>
+      <!-- JiaThis Button BEGIN -->
+      <div class="share_sc">
+        <div id="ckepop">
+          <span class="jiathis_txt">分享到：</span>
+          <a class="jiathis_button_tsina"></a>
+          <a class="jiathis_button_tqq"></a>
+          <a class="jiathis_button_qzone"></a>
+          <a class="jiathis_button_renren"></a>
+          <a class="jiathis_button_douban"></a>
+          <a class="jtico jtico_msn"></a>
+          <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+        </div>
+        <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+      </div>
+      <!-- JiaThis Button END -->
+    </div>
+    <?php if ($_product->isSaleable()):?>
+    <div class="product-collateral">
+      <?php echo $this->getChildHtml('recommend_products') ?>
+      <div class="product_tab" id="product_tab">
+        <div class="product_title" id="product_title">
+          <ul>
+            <li onClick="x:HoverLi(1);" id="tb_1" class="tm1"><a href="javascript:;">产品参数</a><b></b></li>
+            <li onClick="x:HoverLi(2);" id="tb_2" class="tm2"><a href="javascript:;">商品展示</a><b></b></li>
+            <li onClick="x:HoverLi(3);" id="tb_3" class="tm3"><a href="javascript:;">咨询服务</a><b></b></li>
+            <li onClick="x:HoverLi(4);" id="tb_4" class="tm4"><a href="javascript:;">用户评价</a><b></b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="product_details">
+      <div id="tbc_01" style="display: block;">
+
+        <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <?php if ($alias <> 'description'): ?>
+        <div class="box-collateral <?php echo "box-{$alias}"?>">
+          <div class="data-table parameter cf" id="product-attribute-specs-table">
+          <?php if ($title = $this->getChildData($alias, 'title')):?>
+          <h2><?php echo $this->escapeHtml($title); ?></h2>
+          <?php endif;?>
+          <?php echo $html; ?>
+          </div>
+          <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+        </div>
+        <?php endif;?>
+        <?php endforeach;?>
+        <?php print $_product->getDescription();?>
+        <?php echo $this->getChildHtml('product_review') ?>
+        <?php echo $this->getChildHtml('productquestions') ?>
+      </div>
+      <div style="display: none;" id="tbc_02">
+        <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <?php if ($alias <> 'description'): ?>
+        <div class="box-collateral data-table parameter <?php echo "box-{$alias}"?>">
+          <?php if ($title = $this->getChildData($alias, 'title')):?>
+          <h2><?php echo $this->escapeHtml($title); ?></h2>
+          <?php endif;?>
+          <?php echo $html; ?>
+        </div>
+        <?php endif;?>
+        <?php endforeach;?>
+        <?php print $_product->getDescription();?>
+        <?php echo $this->getChildHtml('product_review') ?>
+        <?php echo $this->getChildHtml('productquestions') ?>
+      </div>
+      <div style="display: none;" id="tbc_03">
+        <?php echo $this->getChildHtml('productquestions') ?>
+      </div>
+      <div style="display: none;" id="tbc_04">
+        <?php echo $this->getChildHtml('product_review') ?>
+        <?php echo $this->getChildHtml('productquestions') ?>
+      </div>
+    </div>
+    <?php else: // 不可销售产品（门店商品的详细介绍部分）?>
+    <script type="text/javascript">
+    jQuery(function(){
+      var storeQuestion=jQuery('.storeQuestion');
+        jQuery('.offContect').click(function(){
+          jQuery(storeQuestion).show();
+           jQuery('.back-to').after("<div id='onestepcheckout_popup_overlay'></div>");
+        })
+      jQuery('.closeQuestion').click(function(){
+        jQuery(storeQuestion).hide();
+        jQuery('#onestepcheckout_popup_overlay').remove();
+      });
+
+    })
+    </script>
+    <div class="storeQuestion">
+    <?php echo $this->getChildHtml('productquestions') ?>
+    <div class="closeQuestion"></div>
+    </div>
+    <div class="storeProduct fr mt30">
+      <div class="product-collatera">
+      <?php echo $this->getChildHtml('recommend_products') ?>
+      <div class="product_tab">
+        <div class="storeTitle cf" id="product_title">
+          <ul class="cf">
+            <li onClick="x:HoverLi(1);" id="tb_1" class="tm1"><a href="javascript:;" class="micya">产品参数</a></li>
+            <li onClick="x:HoverLi(2);" id="tb_2" class="tm2"><a href="javascript:;" class="micya">商品展示</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="product_details storeDetail">
+      <div id="tbc_01" style="display: block;">
+        <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <?php if ($alias <> 'description'): ?>
+        <div class="box-collateral <?php echo "box-{$alias}"?>">
+          <?php if ($title = $this->getChildData($alias, 'title')):?>
+          <h2><?php echo $this->escapeHtml($title); ?></h2>
+          <?php endif;?>
+          <?php echo $html; ?>
+        </div>
+        <?php endif;?>
+        <?php endforeach;?>
+        <?php print $_product->getDescription();?>
+      </div>
+      <div style="display: none;" id="tbc_02">
+        <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <?php if ($alias <> 'description'): ?>
+        <div class="box-collateral <?php echo "box-{$alias}"?>">
+          <?php if ($title = $this->getChildData($alias, 'title')):?>
+          <h2><?php echo $this->escapeHtml($title); ?></h2>
+          <?php endif;?>
+          <?php echo $html; ?>
+        </div>
+        <?php endif;?>
+        <?php endforeach;?>
+        <?php print $_product->getDescription();?>
+      </div>
+    </div>
+ </div>
+    <div class="storeLeft mt30">
+      <div class="list-left fr">
+        <a href="#">
+          <img src="/media/list-left.jpg" alt="" width="238" height="214" />      
+        </a>
+        <img class="mt10" src="/media/others-buy.png" alt="" width="239" height="44" />      
+        <ul class="products-grid">
+          <li class="item">
+            <a class="product-image" href="#">
+              <img class="lazy" src="/media/catalog/product/cache/1/small_image/236x236/9df78eab33525d08d6e5fb8d27136e95/t/2/t2kxpdxmvaxxxxxxxx__667454208_12.jpg" alt="" width="219" height="219" />      
+            </a>
+            <div class="category_pro">
+              <h2 class="product-name">
+                <a href="#">CXW-200-EA02 全网唯一岛式油烟机 高效静吸 唯美360</a>
+              </h2>
+              <div class="price-box">
+                <span class="price">￥16,666.00</span>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <a class="product-image" href="#">
+              <img class="lazy" src="/media/catalog/product/cache/1/small_image/236x236/9df78eab33525d08d6e5fb8d27136e95/t/2/t2kxpdxmvaxxxxxxxx__667454208_12.jpg" alt="" width="219" height="219" />      
+            </a>
+            <div class="category_pro">
+              <h2 class="product-name">
+                <a href="#">CXW-200-EA02 全网唯一岛式油烟机 高效静吸 唯美360</a>
+              </h2>
+              <div class="price-box">
+                <span class="price">￥16,666.00</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <?php endif?>
+  </div>
+
+  <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+  <?php echo $this->getChildHtml('product_additional_data') ?>
+</div>
+<script type="text/javascript">
+var productAddToCartForm = new VarienForm('product_addtocart_form');
+var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+jQuery(document).ready(function() {
+    productAddToCartForm.submit = function(button){
+        if (this.validator.validate()) {
+            this.form.submit();
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    var product_title = jQuery("#product_title");
+    var product_title_top = product_title.offset().top;
+    reset_product_title_top(product_title, product_title_top);
+    jQuery(window).scroll(function() {
+        reset_product_title_top(product_title, product_title_top);
+    });
+
+});
+ function g(o){return document.getElementById(o);}
+ var parameterHeight=jQuery('.parameter').height();
+  var liLength=jQuery('#product_title li').length;
+    function HoverLi(n){
+        for(var i=1;i<=liLength;i++)
+        {
+            g('tb_'+i).className='tm2';
+            g('tbc_0'+i).style.display='none';
+        }
+        g('tbc_0'+n).style.display='block';
+        g('tb_'+n).className='tm1';
+        var topY = jQuery("#tbc_0"+n).position().top-30;
+        if(n==2&&parameterHeight!=null){
+            jQuery("html,body").animate({scrollTop:topY+Number(parameterHeight)});
+        }else{
+            jQuery("html,body").animate({scrollTop:topY});
+        }
+    }
+</script>

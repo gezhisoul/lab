@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *  luochunhui.com
+ *
+ *     COPYRIGHT (c)  2011 BY  LuoChunhui.  ALL RIGHTS
+ *     RESERVED.   The source code, design, and structure of THIS PROGRAM are trade secrets.
+ * You will not disassemble, decompile, or reverse engineer it, in whole or in part,
+ except to the extent expressly permitted by law.
+ You will not use THIS PROGRAM for illegal purposes. You will comply with all export laws. Giko_Tenpay is licensed, not sold.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Payment
+ * @package    Giko_Tenpay
+ * @author     luochunhui
+ * @copyright  Copyright (c) 2011 LuoChunhui (http://www.luochunhui.com)
+ *
+ *
+ */
+-->
+<layout version="0.1.0">
+    <tenpay_payment_redirect translate="label">
+        <label>Redirect to Tenpay</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="payment"><title>Redirect to Tenpay</title></action>
+        </reference>
+
+        <reference name="content">
+            <block type="core/template" name="tenpayRedirectForm" template="tenpay/redirect.phtml"/>
+        </reference>
+    </tenpay_payment_redirect>
+
+        <tenpay_payment_pay translate="label">
+        <label>Redirect to Tenpay</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="payment"><title>Redirect to Tenpay</title></action>
+        </reference>
+
+        <reference name="content">
+            <block type="core/template" name="tenpayRedirectForm" template="tenpay/redirect.phtml"/>
+        </reference>
+    </tenpay_payment_pay>
+</layout>

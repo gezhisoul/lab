@@ -1,0 +1,43 @@
+<?php
+
+   // widget default template
+   // @author wangxianbin@vanthink.net
+   $productCollection = $this->getLoadedProductCollection();
+?>
+
+<div class="esp-product">
+  <h2 class="hasMore posr"><?php print ($currentCategory = $this->getCurrentCategory())?$currentCategory->getName():''?><a class="fr fwn" href="">更多</a><b>&nbsp;</b></h2>
+  <?php if ($productCollection->count()>0):?>
+  <?php $_collectionSize = $productCollection->count() ?>
+  <?php $_columnCount = $this->getColumnCount(); ?>
+
+   <?php $i=0;foreach ($productCollection as $product): ?>
+  <?php $product = Mage::getModel('catalog/product')->load($product->getId()) ?>
+  <?php $image_src = '' ?>
+  <?php
+     try {
+       $image_src = $this->helper('catalog/image')->init($product, 'frontpage_product_image')->resize(236,236);
+     } catch (Exception $e) {
+       $image_src = $this->helper('catalog/image')->init($product, 'image')->resize(236,236);
+     }
+  ?>
+  <?php if ($i++%$_columnCount==0): ?>
+  <ul class="products-grid first">
+  <?php endif?>
+
+    <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>"> <a class="product-image" title="<?php echo $this->htmlEscape($product->getName()) ?>" href="<?php echo $product->getProductUrl() ?>"> <img class="lazy" data-original="<?php print $image_src?>" src="<?php print $this->getSkinUrl('images/ajax-loader.gif')?>" alt="<?php echo $this->htmlEscape($product->getName()) ?>" /></a>
+      <div class="category_pro">
+        <h2 class="product-name"><a href="<?php echo $product->getProductUrl() ?>"><?php print $product->getName()?></a></h2>
+        <?php echo $this->getPriceHtml($product, true, '-frontpage') ?>
+      </div>
+    </li>
+  <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+  </ul>
+  <?php endif ?>
+
+  <?php endforeach ?>
+  <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+  <?php else:?>
+  <p>暂无数据</p>
+  <?php endif?>
+</div>

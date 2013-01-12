@@ -1,0 +1,62 @@
+<?php
+/**
+ * ---------------------------------------------------------------------------
+ * luochunhui.com
+ *
+ * COPYRIGHT (c)  2011 BY  LuoChunhui.  ALL RIGHTS
+ * RESERVED.   The source code, design, and structure of THIS PROGRAM are trade secrets. 
+ * You will not disassemble, decompile, or reverse engineer it, in whole or in part, 
+ except to the extent expressly permitted by law. 
+ You will not use THIS PROGRAM for illegal purposes. You will comply with all export laws. Giko_Tenpay is licensed, not sold.
+ *
+ * @category   Payment
+ * @package    Giko_Tenpay
+ * @author     luochunhui
+ * @copyright  Copyright (c) 2011 LuoChunhui (http://www.luochunhui.com)
+ * ---------------------------------------------------------------------------
+ *
+ * Alipay Form Block
+ */
+?>
+<h1 class="onestepcheckout-title"><img src="<?php echo $this->getSkinUrl('images/cart_step3.png') ?>" alt="" /></h1>
+<?php
+
+	$standard = Mage::getModel('alipay/payment');
+        $form = new Varien_Data_Form();
+        $form->setAction($standard->getAlipayUrl())
+            ->setId('alipay_payment_checkout')
+            ->setName('alipay_payment_checkout')
+            ->setMethod('GET')
+            ->setUseContainer(true);
+        foreach ($standard->setOrder($this->getOrder())->getStandardCheckoutFormFields() as $field => $value) {
+            $form->addField($field, 'hidden', array('name' => $field, 'value' => $value));
+        }
+
+        $formHTML = $form->toHtml();
+
+echo $formHTML;
+
+?>
+<div class="col2-set order-info-box">
+    <div class="cart_title">
+      
+      <div class="sddd">
+               <ul>
+                    <li>感谢您的惠顾！</li>
+                    <li class="ddh">你的订单是：<a href="<?php echo $this->getUrl().'sales/order/view/order_id/'.$this->getOrder()->getId();?>"> <?php echo $this->getOrder()->getIncrementId();?></a></li>
+                    <li>您会收到订单确认邮件，包含详细的订单内容以及查询订单状态的链接</li>  
+               </ul>
+       </div>
+      
+    </div>
+   <a href="<?php echo $this->getUrl('alipay/payment/pay').'?orderid='.$this->getOrder()->getRealOrderId(); ?>" onclick="this.target='_blank'" ><img class="qfk_button" src="<?php echo $this->getSkinUrl('images/qfk_button.gif')?>" </a>
+</div>
+
+<script type="text/javascript">
+$("alipay_payment_checkout").target= "_blank ";
+//$("tenpay_payment_checkout").submit();
+function zhifu()
+{
+    $("alipay_payment_checkout").submit();
+}
+</script>

@@ -1,0 +1,157 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * One page checkout payment methods
+ *
+ * @see Mage_Checkout_Block_Onepage_Payment_Methods
+ */
+?>
+<?php
+
+$helper = Mage::helper('onestepcheckout/checkout');
+$hide_nonfree_methods = false;
+if($helper->settings['hide_nonfree_payment_methods'])   {
+    foreach($this->getMethods() as $_method)    {
+        if($_method->getCode() == 'free')   {
+            $hide_nonfree_methods = true;
+        }
+    }
+}
+
+
+?>
+
+<div class="payment-methods">
+
+<script type="text/javascript">
+//<![CDATA[
+  <?php echo $this->getChildHtml('reward.scripts'); ?>
+  <?php echo $this->getChildHtml('customerbalance_scripts'); ?>
+  var payment = new Payment('checkout-payment-method-load', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');
+//]]>
+</script>
+    <?php if(str_replace('.', '', Mage::getVersion()) > 1600):?>
+        <?php echo $this->getChildHtml('customerbalance'); ?>
+        <?php echo $this->getChildHtml('reward.points'); ?>
+    <?php endif;?>
+    <style type="text/css">
+#payment_form_<?php echo $this->getMethodCode()?> input {
+    vertical-align: top
+}
+#payment_form_<?php echo $this->getMethodCode()?> label{
+    float:none; margin-right:18px
+}
+</style>
+
+<fieldset class="form-list">
+    <ul id="payment_form cf">
+    <li>
+                    <input name="payment[method]" type="radio" value="alipay_payment" id="p_method_alipay_payment"/><label for="p_method_alipay_payment">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/aliPayment.png') ?>"  alt="支付宝" /></label></li><li>
+                    <div style="display:none;">
+                    <input type="radio" title="财付通" name="payment[method]" value="tenpay_payment" id="p_method_tenpay_payment_ten">
+                     </div>
+                    <input name="payment[bank_type]" type="radio" value="" id="p_method_tenpay_payment_ten" /><label for="p_method_tenpay_payment_ten">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/tencentPayment.png') ?>"  alt="财付通" /></label> </li><li>
+                    <input name="payment[bank_type]" type="radio" value="1001" id="btn_1001"  /><label for="btn_1001">&nbsp;<img  src="<?php echo $this->getSkinUrl('images/tenpay/jianshe.png') ?>"  /></label></li><li>
+                    <input name="payment[bank_type]" type="radio" value="1002" id="btn_1002"  /><label for="btn_1002">&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/nongye.png') ?>" /></label></li><li>
+            
+                    <input name="payment[bank_type]" type="radio" value="1003" id="btn_1003"  /><label for="btn_1003">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/gongshang.png') ?>" /></label>
+                    </li><li>
+                    <input name="payment[bank_type]" type="radio" value="1005" id="btn_1005"  /><label for="btn_1005">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/guangda.png') ?>" /></label>
+                    </li><li>
+                    <input name="payment[bank_type]" type="radio" value="1032" id="btn_1032"  /><label for="btn_1032">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/zhaoshang.png') ?>" /></label></li><li>
+                    <input name="payment[bank_type]" type="radio" value="1022" id="btn_1022"  /><label for="btn_1022">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/minsheng.png') ?>" /></label>
+                </li><li>
+                    <input name="payment[bank_type]" type="radio" value="1052" id="btn_1052"  /><label for="btn_1052">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/jiaotong.png') ?>" /></label>
+                    </li><li>
+                    <input name="payment[bank_type]" type="radio" value="1020" id="btn_1020" /><label for="btn_1020">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/pufa.png') ?>" /></label> 
+                    </li>
+                
+            
+    
+    
+</ul>
+</fieldset>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+var checkout = new Checkout();
+$$('#checkout-payment-method-load dt input').invoke('observe', 'click', function(e) {
+
+    var element = e.element();
+    var name = 'payment_form_' + element.getValue();
+    payment.currentMethod = element.getValue();
+    /* Hide all other forms */
+    $$('dd.payment-method').invoke('hide');
+
+    if(element.checked) {
+        var form = $(name);
+        var container = $('container_payment_method_' + element.getValue());
+
+        if(element !== null && container !== null)    {
+            container.show();
+            $(name).show();
+        }
+    }
+});
+
+<?php if(Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('customer')->isLoggedIn()):?>
+//if we have a enterprise version we should include this
+
+rPoints = $('use_reward_points');
+if(rPoints){
+    if(rPoints.checked){
+        payment.switchRewardPointsCheckbox();
+    }
+}
+cBalance = $('use_customer_balance');
+if(cBalance){
+    if(cBalance.checked){
+        payment.switchCustomerBalanceCheckbox();
+    }
+}
+//if we have a enterprise version we should include this end
+<?php endif;?>
+
+payment.currentMethod = "<?php echo $this->getQuote()->getPayment()->getMethod() ?>";
+//]]>
+jQuery(function(){
+    var tencentAll=jQuery('.form-list li').not(':first');
+    var tencent=jQuery('.form-list li').eq(1).children('div').children('input');
+    tencentAll.click(function(){ 
+        tencent.attr('checked','checked');
+    })
+    var tencentFirst=jQuery('.form-list li').eq(0);
+    tencentFirst.click(function(){
+    tencent.attr('checked',false);
+    })
+    var tencentSecond=jQuery('.form-list li').eq(1);
+    tencentSecond.click(function(){
+        tencentSecond.find('input').attr('checked','checked');
+    })
+})
+</script>

@@ -1,0 +1,64 @@
+<?php
+define('ROOT_CATEGORY_ID', 2);
+define('OCCASION_CATEGORY_ID', 21);
+define('TARGET_CATEGORY_ID', 26);
+?>
+<?php $categories = Mage::getModel('catalog/category')->getCategories(ROOT_CATEGORY_ID) ?>
+<?php $count = is_array($categories)?count($categories):$categories->count(); ?>
+<?php if($count): ?>
+<div class="brandLeft">
+  <div class="leftTop">按分类分</div>
+  <div class="leftMain" id="left-menu">
+    <ul>
+      <?php foreach ($categories as $categoryNode): ?>
+      <?php $category = Mage::getModel('catalog/category')->load($categoryNode->getId()) ?>
+      <?php if($category->getIsActive()): ?>
+      <li <?php if ($this->isCategoryActive($category)) print 'class="current"' ?>>
+        <a href="<?php echo $this->getCategoryUrl($category) ?>"><?php echo $this->htmlEscape($category->getName()) ?></a>
+        <?php if ($category->hasChildren()):?>
+        <?php $subcategories = $category->getChildrenCategories() ?>
+        <dl>
+          <?php foreach ($subcategories as $subcategory): ?>
+          <?php if($subcategory->getIsActive()): ?>
+          <dd><a href="<?php echo $this->getCategoryUrl($subcategory) ?>"<?php if ($this->isCategoryActive($subcategory)): ?> class="current"<?php endif; ?>><?php echo $this->htmlEscape($subcategory->getName()) ?></a></dd>
+          <?php endif ?>
+          <?php endforeach ?>
+        </dl>
+        <?php endif ?>
+      </li>
+      <?php endif ?>
+      <?php endforeach ?>
+    </ul>
+  </div>
+</div>
+<div class="brandLeft">
+  <div class="leftTop">按场合分</div>
+  <div class="category_fl">
+    <?php $occasionCategories = Mage::getModel('catalog/category')->getCategories(OCCASION_CATEGORY_ID) ?>
+    <?php if ($occasionCategories->count()>0): ?>
+      <ul>
+        <?php foreach ($occasionCategories as $category): ?>
+          <?php if($category->getIsActive()): ?>
+            <li <?php if ($this->isCategoryActive($category)) print 'class="current"' ?>><a href="<?php echo $this->getCategoryUrl($category) ?>"><?php echo $this->htmlEscape($category->getName()) ?></a></li>
+          <?php endif?>
+        <?php endforeach ?>
+      </ul>
+    <?php endif ?>
+  </div>
+</div>
+<div class="brandLeft">
+  <div class="leftTop">按送礼对象分</div>
+  <div class="category_fl">
+    <?php $targetCategories = Mage::getModel('catalog/category')->getCategories(TARGET_CATEGORY_ID) ?>
+    <?php if ($targetCategories->count()>0): ?>
+      <ul class="two_cols">
+        <?php foreach ($targetCategories as $category): ?>
+          <?php if($category->getIsActive()): ?>
+            <li <?php if ($this->isCategoryActive($category)) print 'class="current"' ?>><a href="<?php echo $this->getCategoryUrl($category) ?>"><?php echo $this->htmlEscape($category->getName()) ?></a></li>
+          <?php endif?>
+        <?php endforeach ?>
+      </ul>
+    <?php endif ?>
+  </div>
+</div>
+<?php endif; ?>

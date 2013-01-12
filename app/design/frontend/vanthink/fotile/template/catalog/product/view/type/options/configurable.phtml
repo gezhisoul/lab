@@ -1,0 +1,186 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+<dl>
+  <?php foreach($_attributes as $_attribute): ?>
+  <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?>:</label></dt>
+  <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+  <div class="input-box">
+    <ul id="ul-attribute<?php echo $_attribute->getAttributeId() ?>"></ul>
+    <input id="attribute<?php echo $_attribute->getAttributeId() ?>" name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" type="hidden" />
+  </div>
+  </dd>
+<?php endforeach; ?>
+</dl>
+
+<script type="text/javascript">
+
+var selected_items = {};
+var json_config = <?php echo $this->getJsonConfig() ?>;
+function get_top_attribute(parent) {
+    var is_children = false;
+    for(attribute in json_config.attributes) {
+        if (parent==0 || is_children) {
+            return json_config.attributes[attribute];
+        }
+        if (attribute==parent) {
+            is_children = true;
+        }
+    }
+    return false;
+}
+
+jQuery(function() {
+    product_config_init(<?php echo $this->getJsonConfig() ?>);
+});
+
+/* finds the intersection of
+ * two arrays in a simple fashion.
+ *
+ * PARAMS
+ *  a - first array, must already be sorted
+ *  b - second array, must already be sorted
+ *
+ * NOTES
+ *
+ *  Should have O(n) operations, where n is
+ *    n = MIN(a.length(), b.length())
+ */
+function intersect_safe(a, b) {
+    var ai=0, bi=0;
+    var result = new Array();
+
+    while( ai < a.length && bi < b.length ) {
+        if      (a[ai] < b[bi] ){ ai++; }
+        else if (a[ai] > b[bi] ){ bi++; }
+        else /* they're equal */ {
+            result.push(a[ai]);
+            ai++;
+            bi++;
+        }
+    }
+    return result;
+}
+
+function product_config_init() {
+    var first_attribute = get_top_attribute(0);
+    if (first_attribute) {
+        render_select_list(first_attribute, 0, null);
+    }
+    init_select(0);
+}
+
+function reset_children(id) {
+    var attr = get_top_attribute(id);
+    if (attr) {
+        jQuery('#ul-attribute'+attr.id).html('');
+        reset_children(attr.id);
+    } else {
+        jQuery('#ul-attribute'+id).html('');
+    }
+}
+
+function init_select(id) {
+    var attr=get_top_attribute(id);
+    if (attr) {
+        select_handler(jQuery('#ul-attribute'+attr.id).children('li').eq(0), attr);
+        init_select(attr.id);
+    } else {
+        select_handler(jQuery('#ul-attribute'+id).children('li').eq(0), attr);
+    }
+}
+
+function select_handler($that, attribute) {
+    // toggle selected
+    jQuery('#ul-attribute'+attribute.id).find('.attribute-select').removeClass('selected');
+    $that.addClass('selected');
+
+    // set value to hidden input
+    jQuery('#attribute'+attribute.id).val($that.attr('ref'));
+
+    // current click store to select_items array
+    selected_items[attribute.id] = {"id": attribute.id, "optionId": $that.attr('ref')};
+
+    var child_attribute = get_top_attribute(attribute.id);
+
+    if (child_attribute) {
+        reset_children(attribute.id);
+        render_select_list(child_attribute, attribute, $that);
+    }
+}
+
+function render_select_list(attribute, parent, parent_li) {
+
+    // Closure function for get parent option by id
+    var get_option_by_id = function(options, id) {
+        for (var i=0; i<options.length; i++) {
+            if(options[i].id==id) {
+                return options[i];
+            }
+        }
+    };
+    var $ul = jQuery('#ul-attribute'+attribute.id);
+
+    for (var i=0; i<attribute.options.length; i++) {
+        var option = attribute.options[i];
+        if (parent!=0) {
+            var parent_option = get_option_by_id(parent.options, parent_li.attr('ref'));
+            var intersection = intersect_safe(option.products, parent_option.products);
+            if(intersection.length == 0) {
+                continue;
+            }
+        }
+
+        var $li = jQuery('<li class="attribute-select"><a href="javascript:void(0)">'+option.label+'</a></li>');
+        $li.attr('id', 'li-attribute'+option.id);
+        $li.attr('ref', option.id);
+
+        $li.click(function() {
+            var $that = jQuery(this);
+            select_handler($that, attribute);
+        });
+        $ul.append($li);
+    }
+    // apply select_items to all attribute options
+    jQuery('#ul-attribute'+attribute.id).find('.attribute-select').removeClass('selected');
+    if (selected_items[attribute.id]!==undefined) {
+        $target_li = jQuery('#li-attribute'+selected_items[attribute.id].optionId);
+        if ($target_li.length>0) {
+            select_handler($target_li, attribute);
+        }
+    }
+}
+
+</script>
+<?php endif;?>
+

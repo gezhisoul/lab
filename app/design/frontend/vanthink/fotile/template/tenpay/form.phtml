@@ -1,0 +1,64 @@
+<?php
+/*
+ * ---------------------------------------------------------------------------
+ *  luochunhui.com
+ *
+ *     COPYRIGHT (c)  2011 BY  LuoChunhui.  ALL RIGHTS
+ *     RESERVED.   The source code, design, and structure of THIS PROGRAM are trade secrets. 
+ * You will not disassemble, decompile, or reverse engineer it, in whole or in part, 
+ except to the extent expressly permitted by law. 
+ You will not use THIS PROGRAM for illegal purposes. You will comply with all export laws. Giko_Tenpay is licensed, not sold.
+ * 
+ * ---------------------------------------------------------------------------
+ * 
+ * @package    Giko_Tenpay
+ * @category   Payment
+ * @author     luochunhui <wo@luochunhui.com>
+ * @copyright  Copyright (c) 2011 LuoChunhui (http://www.luochunhui.com)
+ *
+ */
+?>
+<style type="text/css">
+#payment_form_<?php echo $this->getMethodCode()?> input {
+    vertical-align: top
+}
+#payment_form_<?php echo $this->getMethodCode()?> label{
+	float:none; margin-right:30px
+}
+</style>
+
+<fieldset class="form-list">
+	<ul id="payment_form_<?php echo $this->getMethodCode()?>" style="display: none">
+	<li>
+	<table>
+		<tr>
+			<td colspan="2">
+			<TABLE style="FONT-SIZE: 12px;border:1px solid #D8D8D8" cellSpacing="1" cellPadding="3" width="800" align="center" bgColor="#D8D9DB" border="0">
+				<tr>
+					<td width="800" height="36" style="background: #F1F3F2">&nbsp;<img
+						src="/media/tenpay/logo.gif" />为您提供以下网上支付服务<span style="color: #868686">（财付通是腾讯旗下第三方支付平台）</span></td>
+				</tr>
+				<tr>
+					<td height="36" style="background: #FFFFFF; padding-left: 20px">  
+					<br /><br />
+					<input name=payment[bank_type] type="radio" value="1001" id="btn_1001"  /><label for="btn_1001">&nbsp;<img src="/media/tenpay/17.gif" /></label>
+					<input name=payment[bank_type] type="radio" value="1002" id="btn_1002"  /><label for="btn_1002">&nbsp;<img src="/media/tenpay/10.gif" /></label>
+					<input name=payment[bank_type] type="radio" value="1003" id="btn_1003"  /><label for="btn_1003">&nbsp;<img src="/media/tenpay/2.gif" /></label>
+					<input name=payment[bank_type] type="radio" value="1005" id="btn_1005"  /><label for="btn_1005">&nbsp;<img src="/media/tenpay/1.gif" /></label>
+					<br /><br />
+					<input name=payment[bank_type] type="radio" value="1032" id="btn_1032"  /><label for="btn_1032">&nbsp;<img src="/media/tenpay/11.gif" /></label>
+					<input name=payment[bank_type] type="radio" value="1022" id="btn_1022"  /><label for="btn_1022">&nbsp;<img src="/media/tenpay/3.gif" /></label>
+					<input name=payment[bank_type] type="radio" value="1052" id="btn_1052"  /><label for="btn_1052">&nbsp;<img src="/media/tenpay/16.gif" /></label>
+					<input name=payment[bank_type] type="radio" value="1020" id="btn_1020" /><label for="btn_1020">&nbsp;<img src="/media/tenpay/5.gif" /></label> 
+					<br /><br />
+					<input name=payment[bank_type] type="radio" value="0" id="btn_0" /><label for="btn_0">&nbsp;&nbsp;<img src="/media/tenpay/logo.gif"  alt="财付通" /><span style="color: #868686">财付通账户余额支付，一点通支付</span></label> 
+					<br /><br />
+					</td>
+				</tr>
+			</TABLE>
+			</td>
+		</tr>
+	</table>
+	</li>
+</ul>
+</fieldset>

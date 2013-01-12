@@ -1,0 +1,88 @@
+<?php
+/**
+ * Safitech Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Safitech
+ * @package    Safitech_Catalog
+ * @author     S. Mohammed Alsharaf
+ * @copyright  Copyright (c) 2009 Safi Technologies Ltd. (http://www.safitech.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+
+
+
+<script type='text/javascript' src='<?php echo $this->getJsUrl('mz/mz-packed.js'); ?>'></script> 
+
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+
+   
+<div class="more-views" id="wrap">       
+  <ul id="mycarousel" class="jcarousel-skin-tango">        
+    <?php foreach ($this->getGalleryImages() as $_image): ?>          
+    <li>            
+    <a class="chooseimga" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()) ; ?>" rel="mz1"   style="outline-color: -moz-use-text-color; outline-style: none; outline-width: 0pt;" rev="
+      <?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(391,391); ?>" >
+      <img width="66" height="66" rev="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()); ?>" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(66,66); ?>" />
+    </a>        
+    </li>    
+    <?php endforeach; ?>    
+  </ul>
+</div> 
+
+<a title="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" rel="opacity: 50;zoom-width: 300px;zoom-height: 300px;zoom-position: right" href="
+  <?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" id="mz1"  class="MagicZoom fr" style="position: relative; display: block; outline-color: -moz-use-text-color; outline-style: none; outline-width: 0pt; text-decoration: none; -moz-user-select: none;"> 
+  <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(391,391) ?>" />         
+  <div style="overflow: hidden; width:300px; height:300px; z-index: 100; visibility: hidden; position: absolute; top: -10000px; left: 215px;" class="MagicZoomBigImageCont">          
+    <div class="MagicZoomHeader"  style="padding: 3px; position: relative; z-index: 10; left: 0px; top: 0px;">
+      <?php echo $this->htmlEscape($this->getImageLabel()) ?>
+    </div>            
+    <div style="overflow: hidden;"> 
+      <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" style="border-width: 0px; padding: 0px; position: relative; left: 0px; top: 0px;"/>
+    </div>        
+  </div>          
+  <div class="MagicZoomPup" style="z-index: 10; visibility: hidden; position: absolute; opacity: 0.5; width:391px; height:391px;">
+  </div>
+</a>      
+<?php else: ?>       
+<?php
+        $_img = '<img class="fr" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(391,391).'" alt="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image')                                       
+    ?>   
+<?php endif; ?>  
+<script type="text/javascript">
+  jQuery(function(){
+    jQuery('#mycarousel').jcarousel({
+        vertical: true
+    });
+  })
+</script>
+
+
+ 
+
+
+ 
+
+
+

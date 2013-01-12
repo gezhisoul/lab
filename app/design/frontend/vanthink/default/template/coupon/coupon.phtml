@@ -1,0 +1,54 @@
+<?php
+
+?>
+
+<div class="page-title-content-one">
+<?php 
+   $customerId =  Mage::getSingleton('customer/session')->getCustomer()->getId();
+   $coupons =  $this->getCustomerCoupon($customerId);  
+?>
+
+<div class="page-title">
+    <strong>优惠券</strong>
+</div>
+<div class="account_layout">
+<div class="order_table">
+<table width="100%" border="0" id="youhui" class="data-table">
+  <tr class="w_yhq_title">
+    <th scope="col">优惠金额</th>
+    <th scope="col">状态</th>
+    <th scope="col">优惠券编号</th>
+    <th scope="col">有效期至</th>
+    <th scope="col">使用条件</th>
+  </tr>
+   <?php foreach($coupons as $coupon):?>
+   <?php            
+           $rule = Mage::getModel('salesrule/rule')
+            ->getResourceCollection()
+            ->addFieldToFilter('code', $coupon->getGuizeihao())
+            ->getFirstItem();
+           // echo var_export($rule->getName());
+          // echo var_export(date("Y-m-d"));
+           
+            if(!$rule->getName() || ($rule['to_date'] && $rule['to_date']<date("Y-m-d"))){
+               $coupon = Mage::getModel('coupon/coupon')->load($coupon->getYouhuiquanhao());
+               $coupon->setZhuangtai(1);
+               $coupon->save();
+            }
+          //  $rules = $collection->getData();
+   ?>
+  <tr class="w_yhq_xinxi">
+    <td><?php echo $coupon->getJine();?></td>
+    <td><?php echo $this->ConvertZhuangtai($coupon->getZhuangtai());?></td>
+    <td><?php echo $coupon->getYouhuiquanhao();?></td>
+    <td><?php echo $rule['to_date'];?></td>
+    <td class="yhq_last"><?php echo $rule['description'];?></td>
+  </tr>
+   <?php endforeach;?>
+</table>
+</div>
+</div> 
+</div>
+<script type="text/javascript">
+jQuery("#youhui tr:odd").css("background","#F6F6F6")
+</script>

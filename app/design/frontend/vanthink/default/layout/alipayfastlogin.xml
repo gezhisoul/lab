@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <alipayfastlogin_index_notify>			
+        <reference name="content">
+            <block type="core/template" name="alipay_blind" template="alipayfastlogin/blind.phtml">
+            </block>
+        </reference>
+    </alipayfastlogin_index_notify>
+</layout>

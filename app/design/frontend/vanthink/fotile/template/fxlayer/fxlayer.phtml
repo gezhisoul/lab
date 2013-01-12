@@ -1,0 +1,35 @@
+
+<div class="proChosen mb10">
+<?php $attributes = $this->getLayerAttributes()?>
+<?php if (count($attributes) > 0):?>
+<ul class="proChosed">
+  <li class="proChosedTitle">您已选择</li>
+<?php foreach ($attributes as $key=>$value):?>
+  <?php foreach($this->getAttributeOptions($key) as $option):?>
+    <?php if($this->isActive($key,$option['value'])):?>
+      <li><?php echo $option['label']?><a href="<?php echo $this->getAllUrl($key);?>"></a></li>
+    <?php endif ?>
+  <?php endforeach ?>
+<?php endforeach ?>
+</ul>
+
+<div id="narrow-by-list">
+  <?php $i = 0; ?>
+  <?php foreach($attributes as $key=>$value):?>
+  <dl class="cf">
+  <dt class="even <?php if ($i==0) {?>first<?php }?> fl fwb"><?php echo $value?>:</dt>
+  <dd class="even <?php if ($i==0) {?>first<?php }?> fl">
+    <ol>
+      <li <?php if($this->isActive($key)){?>class="proFocus"<?php }?>><a href="<?php echo $this->getAllUrl($key);?>">不限</a></li>
+      <?php foreach($this->getAttributeOptions($key) as $option):?>
+        <li <?php if($this->isActive($key,$option['value'])){?>class="proFocus"<?php }?>><a href="<?php echo $this->getLayerUrl($key,$option['value']);?>"><?php echo $option['label']?></a></li>
+      <?php endforeach; ?>
+    </ol>
+  </dd>
+  </dl>
+  <?php $i++ ?>
+  <?php endforeach; ?>
+</div>
+<?php endif ?>
+</div>
+

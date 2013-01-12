@@ -1,0 +1,30 @@
+<?php
+//$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+//
+//$read = Mage::getSingleton('core/resource')->getConnection('core_read');
+//$query = $read->query("select * from review_yes where customer_id = '".$customerId."' and r_status = 1 order by id desc");
+//$reviews = $query->fetchAll();
+
+$reviews = $this->getCollection();
+?>
+<?php if ($reviews->count()): ?>
+    <table class="data-table" id="dengdaipingjia">
+    <tr>
+      <th>产品名称</th>
+      <th>购买时间</th>
+      <th>标题</th>
+    </tr>
+        <?php foreach ($reviews as $key => $productReview): ?>
+            <?php $review = Mage::getModel('review/review')->load($productReview->getReviewId()) ?>
+            <tr>
+                <td class="pro_name"><a href="<?php echo $this->getProductLink() ?>id/<?php echo $productReview->getEntityPkValue() ?>"><?php echo $this->htmlEscape($productReview->getName()) ?></a></td>
+                <td><?php echo $this->formatDate($review->getCreatedAt(), 'long'); ?></td>
+                <td><?php echo $review->getTitle() ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <div class="noInfo">
+    没有可以评价的商品！
+</div>
+<?php endif; ?>

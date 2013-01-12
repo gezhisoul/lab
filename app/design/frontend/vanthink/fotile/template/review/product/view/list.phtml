@@ -1,0 +1,111 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+            <h2 class="mt10"><span>全部评论</span></h2>
+<script type="text/javascript">
+jQuery(function(){
+  //这是一个非常简单的demo实例，让列表元素分页显示
+  //回调函数的作用是显示对应分页的列表项内容
+  //回调函数在用户每次点击分页链接的时候执行
+  //参数page_index{int整型}表示当前的索引页
+  var initPagination = function() {
+    var num_entries = jQuery("#hiddenresult div.pl").length;
+    // 创建分页
+    jQuery("#Pagination").pagination(num_entries, {
+      num_edge_entries: 1, //边缘页数
+      num_display_entries: 4, //主体页数
+      prev_text: '上一页',
+      next_text: '下一页',
+      callback: pageselectCallback,
+      items_per_page:10 //每页显示1项
+    });
+   }();
+
+  function pageselectCallback(page_index, jq){
+    page_index = Number(page_index) * 10;
+    jQuery("#Searchresult").empty();
+    for (var i=0;i<10;i++) {
+      var num = i + page_index;
+      var new_content = jQuery("#hiddenresult div.pl:eq("+num+")").clone();
+      //alert("#hiddenresult div.pl:eq("+page_index+i+")");
+      jQuery("#Searchresult").append(new_content); //装载对应分页的内容
+    }
+    return false;
+  }
+});
+</script>
+
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews" id="customer-reviews" name="pinglun_form">
+    
+    <?php if (count($_items)):?>
+          <div id="hiddenresult">
+          <?php $count = 0; ?>
+          <?php foreach ($_items as $_review):?>
+          <div class="pl <?php if ($count%2 == 1) echo 'double'; ?>">
+            <dt>
+               <div class="author_date fr">
+                <?php echo $this->__('Review by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?>
+                <small class="date"><?php echo $this->__('Posted on %s', $this->formatDate($_review->getCreatedAt()), 'long') ?></small>
+                </div>
+              <div class="ratings_title">
+                <?php $_votes = $_review->getRatingVotes(); ?>
+                <?php if (count($_votes)): ?>
+                <table class="ratings-table">
+                    <col />
+                    <col />
+                    <tbody>
+                        <?php foreach ($_votes as $_vote): ?>
+                        <tr>
+                            <th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
+                            <td>
+                                <div class="rating-box">
+                                    <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+                <div class="biaoti">标题：<?php echo $this->htmlEscape($_review->getTitle()) ?></div>
+              </div>
+               
+            </dt>
+            <dd>
+                <?php echo nl2br($this->htmlEscape($_review->getDetail())) ?>
+            </dd>
+          </dl>
+         </div>
+         <?php $count++; ?>
+        <?php endforeach; ?>
+      </div>
+    <?php if ($count):?><div id="Pagination" class="pagination" <?php if ($count <= 10):?>style="display:none;"<?php endif; ?>><!-- 这里显示分页 --></div><?php endif; ?>
+    <?php else: ?>
+        <div class="review_none">暂时还没有评论！</div>
+    <?php endif;?>
+    <?php echo $this->getChildHtml('review_form') ?>
+</div>

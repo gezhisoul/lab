@@ -1,0 +1,51 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="block block-account mb10">
+    <div class="hyzx-block-title">
+      <a class="micya" href="<?php echo $this->getUrl('customer/account');?>">账户中心</a>
+    </div>
+    <div class="block-content">
+        <ul>
+          <h2>订单信息</h2>
+          <li><a href="<?php echo $this->getUrl('sales/order/history');?>">我的订单</a></li>
+          <li><a href="<?php echo $this->getUrl('wishlist');?>">我的收藏</a></li>
+          <li><a href="<?php echo $this->getUrl('review/customer');?>">商品评价</a></li>
+        </ul>
+        <ul>
+          <h2>账户信息</h2>
+          <li><a href="<?php echo $this->getUrl('rewards/customer');?>">我的积分与兑换</a></li>
+          <li><a href="<?php echo $this->getUrl('coupon');?>">我的优惠券</a></li>
+        </ul>
+        <ul>
+          <h2>个人信息</h2>
+          <li><a href="<?php echo $this->getUrl('customer/account/edit');?>">个人资料</a></li>
+          <li><a href="<?php echo $this->getUrl('customer/account/edit');?>">修改密码</a></li>
+          <li><a href="<?php echo $this->getUrl('customer/address');?>">地址管理</a></li>
+          <li><a href="<?php echo $this->getUrl('customer/address/new');?>">增加新地址</a></li>
+        </ul>
+    </div>
+</div>

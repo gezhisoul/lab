@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+     
+  <customer_account translate="label">
+    <reference name="left">
+           <reference name="customer_account_navigation">
+                 <action method="addLink" translate="label" module="coupon" >
+                      <name>coupon</name><path>coupon</path><label>我的优惠券</label>
+                  </action>
+           </reference>
+    </reference> 
+  </customer_account>
+  <coupon_index_index>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="coupon/customer"  name="coupon.customer" template="coupon/coupon.phtml" />   
+        </reference>
+  </coupon_index_index>
+    
+</layout>

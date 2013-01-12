@@ -1,0 +1,28 @@
+<?php
+
+   // widget default template
+   // @author wangxianbin@vanthink.net
+   $productCollection = $this->getLoadedProductCollection();
+?>
+
+<ul class="products-grid">
+   <?php $i=0;foreach ($productCollection as $product): ?>
+  <?php $product = Mage::getModel('catalog/product')->load($product->getId()) ?>
+  <?php $image_src = '' ?>
+  <?php
+     try {
+       $image_src = $this->helper('catalog/image')->init($product, 'frontpage_product_image')->resize(219,219);
+     } catch (Exception $e) {
+       $image_src = $this->helper('catalog/image')->init($product, 'image')->resize(219,219);
+     }
+  ?>
+  <li "item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>"> <a class="product-image" title="<?php echo $this->htmlEscape($product->getName()) ?>" href="<?php echo $product->getProductUrl() ?>"> <img class="lazy" data-original="<?php print $image_src?>" src="<?php print $this->getSkinUrl('images/ajax-loader.gif')?>" alt="<?php echo $this->htmlEscape($product->getName()) ?>" /> </a>
+    <div class="category_pro">
+      <h2 class="product-name"><a href="<?php echo $product->getProductUrl() ?>"><?php print $product->getName()?></a></h2>
+      <?php echo $this->getPriceHtml($product, true, '-frontpage') ?>
+    </div>
+  </li>
+  <?php endforeach ?>
+</ul>
+
+

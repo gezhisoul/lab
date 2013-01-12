@@ -1,0 +1,103 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see Mage_Customer_Block_Form_Login
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="account-login">
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form" class="fl">
+        <div class="col2-set">
+            <div class="col-2 registered-users">
+                <h2 class="micya"><strong>会员</strong><b class="coyel">登录</b><span class="fr">如果已经注册，请从这里登录</span></h2>
+                <div class="login_bgColor">
+                <div class="content">
+                    <ul class="form-list">
+                        <li>
+                            <label for="email" class="required"><span class="xinghao">*</span><?php echo '用户名' ?>：</label>
+                            <div class="input-box">
+                              <input type="text" name="login[username]" value="" id="email" class="input-text required-entry " title="<?php echo $this->__('Email Address') ?>" />
+                              <span class="note">您的邮箱或是手机号</span>
+                            <script>
+                              jQuery('email').onfocus = function(){
+                                  if( this.value == this.defaultValue ){
+                                      this.value = '';
+                                      this.style.color = '#999';
+                                  }
+                              };
+                              jQuery('email').onblur = function(){
+                                  if( this.value == '' || this.value == this.defaultValue ){
+                                      this.value = this.defaultValue;
+                                      this.style.color = '#999';
+                                  }
+                              };
+                          </script>
+                            </div>
+                        </li>
+                        <li class="last">
+                            <label for="pass" class="required"><span class="xinghao">*</span><?php echo '密码' ?>：</label>
+                            <div class="input-box">
+                              <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                            </div>
+                        </li>
+                    </ul>
+
+                    
+                </div>
+                <div class="col-2 registered-users">
+                    <div class="buttons-set">
+                        <button type="submit" class="button submit_btn" title="<?php echo $this->__('Login') ?>" name="send" id="send2"></button><a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+                    </div>
+                </div>
+                </div>
+             <div class="dl_zl">
+                <p>你也可以通过我们战略合作伙伴账号进行登录！</p>
+                    <a href="" id="ai-pay"></a>
+                    <a href="" id="sina-login"></a>
+                    <a href="" id="qq-login"></a>
+                </div> 
+            </div>
+        </div>
+    </form>
+
+    <div class="col-1 new-users">
+      <div class="content">
+        <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('login')->toHtml() ?>
+          <?php echo $this->getChildHtml('customer_loginform_register') ?>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+    </script>
+</div>
+

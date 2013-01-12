@@ -1,0 +1,41 @@
+              
+
+        <?php //echo var_export(Mage::registry('current_category')->getData('layer_attribute_with_category'));?>
+        <?php 
+            /*$collections = Mage::getResourceModel('catalog/product_attribute_collection')
+            ->addVisibleFilter()
+            ->addIsFilterableFilter();
+            echo $collections->getSize();
+                        $attributes =array();
+              foreach($collections as $collection){
+                $attribute = array();
+                $attribute['value'] = $collection->getAttributeCode();
+                $attribute['label'] = $collection->getFrontendLabel();
+                $attributes[] = $attribute;
+              }
+              var_export($attributes);
+              foreach($collections as $collection){
+                 // var_export($collection->getData());
+                 //  break;
+              }    */
+            
+        
+        ?>
+        <dl id="narrow-by-list">
+              <?php foreach($this->getLayerAttributes() as $key=>$value):?>      
+                                                                    <dt class="even"><?php echo $value?>:</dt>
+                    <dd class="even"> 
+<ol>
+    <li <?php if($this->isActive($key)){?>class="proFocus"<?php }?>>
+         <a href="<?php echo $this->getAllUrl($key);?>">不限</a>
+    </li>
+    <?php foreach($this->getAttributeOptions($key) as $option):?>
+    <li <?php if($this->isActive($key,$option['value'])){?>class="proFocus"<?php }?>>
+    <?php //echo $this->isActive('tanziguige',$option['value'])?>
+                <a href="<?php echo $this->getLayerUrl($key,$option['value']);?>"><?php echo $option['label']?></a>  
+    </li>
+    <?php endforeach; ?>
+</ol>
+</dd>
+ <div class="c">&nbsp;</div>
+ <?php endforeach; ?>                                                                                                                                                                           </dl>

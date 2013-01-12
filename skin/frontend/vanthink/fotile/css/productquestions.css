@@ -1,0 +1,123 @@
+.productquestions-container{
+	list-style-type:none;  
+	margin:0;
+  text-align:left;margin:0 auto;overflow:hidden
+}
+.product_details h2{
+	border-bottom:1px solid #000000;
+	color:#F08200;
+	font-size:15px;
+	font-weight:bold;
+	padding:0 0 7px;
+}
+.product_details h2 span{
+      padding: 10px 8px;
+      color: #FFFFFF;
+      background: #f08200;
+}
+.ratings-table th{
+  color: #666666;
+}
+.productquestions-container .pager .amount {
+	float:left;
+	margin:0;
+}
+.productquestions-container .pager select {
+	font-size:12px;
+}
+.productquestions-container .pager .limiter {
+	float:right; display:none
+}
+.productquestions-container .pager .limiter img {
+	margin-left:5px;
+	vertical-align:middle;
+}
+.productquestions-container li.record {
+	margin-top:10px;
+}
+.productquestions-container li.record ul{
+	padding:10px 0;
+}
+.productquestions-container li.record ul li{
+    padding-left: 28px;
+    background: url(../images/questions.png) no-repeat;
+    overflow: hidden;
+    width:auto;
+    line-height:24px;
+}
+.productquestions-container li.record ul li.reply{
+    margin-top:10px;
+    background: url(../images/answers.png) no-repeat;
+    color: #f08200;
+    border-bottom: 1px #cccccc dotted;
+    padding-bottom: 8px;
+}
+.productquestions-container li.record ul li.helpfulness{
+	background-color:#F1ECDB;
+	text-align: right;
+	margin-bottom: 4px;
+}
+.productquestions-container p,.product_details .review_none,.product_details .form-add{
+	margin:20px 10px;
+}
+.productquestions-container .form-field {
+	margin: 0 0 8px;
+}
+.productquestions-container label {
+  color:#4F4F4F;
+  float: left;
+  font-weight: normal;
+  margin-right:5px;
+  width:82px; text-align: right;
+}
+.productquestions-container .pager label {
+	color:inherit;
+}
+
+.productquestions-container input {
+	margin-right:5px;
+}
+.product_details .button-set {
+	clear:both;
+	margin:15px 0 0;
+	padding:8px 60px 0 0;
+	text-align:right; overflow:hidden
+}
+.pager:after {
+	display:block;
+	content:".";
+	clear:both;
+	font-size:0;
+	line-height:0;
+	height:0;
+	overflow:hidden;
+	zoom:1;
+}
+.productquestions-container .record {
+    clear: both;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.productquestions-container .record dt {
+    background: none repeat scroll 0 0 #FAF7EE;
+    float:left;
+    height:auto;
+    line-height: 30px;
+    overflow: hidden;
+    padding: 0 10px; width:780px;
+}
+.productquestions-container .record dd {
+    border-bottom: 1px dotted #CCCCCC;float:left;list-style:none;
+    overflow: hidden;
+    padding:10px 10px 20px;
+    width: 780px;
+}
+.productquestions-container .wenti_title{
+    float:left;
+    color: #888;
+    font-weight: bold;
+  }
+.productquestions-container .author_date{float:right;color:#666}
+.productquestions-container .author_date .date{padding:0 0 0 30px}
+.productquestions-container ul{width:auto;}
+.zixun_layout{padding-top:20px;}
