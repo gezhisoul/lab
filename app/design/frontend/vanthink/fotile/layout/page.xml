@@ -54,7 +54,7 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>jquery.aw-showcase.min.js</script></action>
                 <action method="addJs"><script>jquery/jquery.lazyload.min.js</script></action>
                 <action method="addJs"><script>flowplayer-3.2.11.min.js</script></action>
-                <action method="addJs"><script>common.js</script></action>
+                 <action method="addItem"><type>skin_js</type><name>js/common.js</name></action>
                 <action method="addCss"><stylesheet>css/style.css</stylesheet></action>
                 <action method="addItem"><type>skin_css</type><name>css/styles-ie.css</name><params/><if>lt IE 8</if></action>
 
