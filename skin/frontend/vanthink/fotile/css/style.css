@@ -263,12 +263,12 @@ nav{
 .nav{
     width: 785px;
     height: 24px;
+    z-index: 9;
 }
 .nav li{
     float: left;
     height: 24px;
     line-height: 21px;
-    z-index: 2;
 }
 
 nav .nav li a{
@@ -363,7 +363,7 @@ nav .nav-first a{
     height: 210px;
     background: url(../images/drop-down.png) no-repeat;
     padding-top: 12px;
-    z-index: 90;
+    z-index: 99;
 }
 .nav .drop-down a{
     text-indent: 0;
@@ -2763,4 +2763,19 @@ h3.table-caption{font-size:14px;font-weight:bold;padding-bottom:10px;}
     top: 10px;
     background: url(../images/cmsNav.png) no-repeat;
 }
-
+.browserWarn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 3%;
+    background-color: #121212;
+    background-image: url(../images/browserWarn.png);
+    background-repeat: no-repeat;
+    background-position: 10px 12px;
+    color: #f08200;
+    _position:absolute;
+    _bottom: 0;
+    _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+}

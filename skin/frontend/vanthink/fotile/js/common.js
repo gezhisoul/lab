@@ -1,12 +1,11 @@
 (function(jQuery){jQuery.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=jQuery.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){jQuery(ob).unbind("mousemove",track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=="mouseenter"){pX=ev.pageX;pY=ev.pageY;jQuery(ob).bind("mousemove",track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{jQuery(ob).unbind("mousemove",track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);
 jQuery(function() {
-    var url=window.location.href;
-    var urls=url.substr(url.length-5,url.length);
-    var a1=jQuery.browser.msie&&(jQuery.browser.version == "6.0") && urls!='/noIe' ;
-    var a2=jQuery.browser.msie&&(jQuery.browser.version == "7.0") && urls!='/noIe' ;
-    // if(a1 || a2 || a3){
-    //     window.location.href='/noIe';
-    // }
+    var a1=jQuery.browser.msie&&(jQuery.browser.version == "6.0") ;
+    var a2=jQuery.browser.msie&&(jQuery.browser.version == "7.0") ;
+    var a3=jQuery.browser.msie&&(jQuery.browser.version == "8.0") ;
+     if(a1 || a2 || a3){
+        jQuery('.browserWarn').show();
+    }
     var dropdown = jQuery('nav ul li');
     var topdrop = jQuery('section .posr');
     dropdown.hoverIntent({
