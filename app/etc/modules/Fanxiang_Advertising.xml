@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Fanxiang_Advertising>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Fanxiang_Advertising>
+    </modules>
+</config> 

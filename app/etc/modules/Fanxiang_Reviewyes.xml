@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Reviewyes>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Fanxiang_Reviewyes>
+    </modules>
+</config>

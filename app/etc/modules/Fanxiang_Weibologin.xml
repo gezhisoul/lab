@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Weibologin>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Fanxiang_Weibologin>
+    </modules>
+</config>

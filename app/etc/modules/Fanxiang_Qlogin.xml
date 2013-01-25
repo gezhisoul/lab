@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Qlogin>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Fanxiang_Qlogin>
+    </modules>
+</config>

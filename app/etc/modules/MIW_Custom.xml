@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <MIW_Custom>
+            <active>true</active>
+            <codePool>community</codePool>
+        </MIW_Custom>
+    </modules>
+</config>
