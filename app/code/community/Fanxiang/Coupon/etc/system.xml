@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <coupon translate="label" module="coupon">
+            <label>优惠券管理</label>
+            <sort_order>250</sort_order>
+        </coupon>
+    </tabs>
+    <sections>
+		<coupon translate="label" module="coupon">
+            <label>优惠券管理</label>
+            <tab>coupon</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+ 
+              <coupon translate="label"> 
+              <label>优惠券管理</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                    <len translate="label">
+                     <label>优惠券长度</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                     </len>
+
+                     
+                    </fields>
+               </coupon>
+            </groups>
+        </coupon>
+    </sections>
+</config>

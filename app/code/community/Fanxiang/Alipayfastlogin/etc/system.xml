@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <alipayfastlogin translate="label" module="alipayfastlogin">
+            <label>支付宝快捷登录</label>
+            <sort_order>250</sort_order>
+        </alipayfastlogin>
+    </tabs>
+    <sections>
+    		<alipayfastlogin translate="label" module="alipayfastlogin">
+            <label>支付宝快捷登录</label>
+            <tab>alipayfastlogin</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <key translate="label"> 
+                    <label>支付宝密钥</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <partner translate="label">
+                            <label>ALIPAY_PARTNER</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </partner>
+                        <key translate="label">
+                            <label>ALIPAY_KEY</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </key>
+                        <domain translate="label">
+                            <label>网站域名</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </domain>
+                    </fields>
+                </key>
+            </groups>
+        </alipayfastlogin>
+    </sections>
+</config>

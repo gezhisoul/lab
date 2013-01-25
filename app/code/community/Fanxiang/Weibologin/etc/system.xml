@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <weibologin translate="label" module="weibologin">
+            <label>新浪微博登录</label>
+            <sort_order>250</sort_order>
+        </weibologin>
+    </tabs>
+    <sections>
+		<weibologin translate="label" module="weibologin">
+            <label>新浪微博登录</label>
+            <tab>weibologin</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+ 
+              <key translate="label"> 
+              <label>微博密钥</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                    <akey translate="label">
+                     <label>WB_AKEY</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                     </akey>
+                     <skey translate="label">
+                     <label>WB_SKEY</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                     </skey>
+                     
+                    </fields>
+               </key>
+            </groups>
+        </weibologin>
+    </sections>
+</config>

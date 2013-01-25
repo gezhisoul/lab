@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Reviewreply>
+            <version>1.0.0</version>
+        </Fanxiang_Reviewreply>
+    </modules>
+    
+    <global>
+        <blocks>
+            <reviewreply>
+                <class>Fanxiang_Reviewreply_Block</class>
+            </reviewreply>  
+                        <!--重写 -->
+        <adminhtml>
+             <rewrite>
+              <review_edit_form>Fanxiang_Reviewreply_Block_Adminhtml_Review_Edit_Form</review_edit_form>
+            </rewrite> 
+        </adminhtml>
+        </blocks> 
+  
+            
+        <helpers>
+            <reviewreply>
+                <class>Fanxiang_Reviewreply_Helper</class>
+            </reviewreply>
+        </helpers>        
+        <models>
+          			<review_mysql4>
+          				<rewrite>
+          					<review>Fanxiang_Reviewreply_Model_Mysql4_Review</review>
+          				</rewrite>
+          			</review_mysql4>
+        </models>
+         <resources>
+        			<reviewreply_setup>
+        				<setup>
+        					<module>Fanxiang_Reviewreply</module>
+        					<class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+        				</setup>
+        				<connection>
+        					<use>default_setup</use>
+        				</connection>
+        			</reviewreply_setup>
+        		</resources>
+
+    </global>
+    <frontend>
+
+    </frontend>
+
+    
+</config>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+
+<config>
+    <api>
+       <resources>
+            <coupon translate="title" module="coupon">
+                <model>coupon/api</model>
+                <title>Coupon Api</title>
+                <acl>coupon</acl>
+                <methods>
+                    <update translate="title" module="coupon">
+                        <title>Update Coupon Status</title>
+                        <method>update</method>
+                    </update>
+                    <create translate="title" module="coupon">
+                        <title>Create Coupon</title>
+                        <method>create</method>
+                    </create>
+                </methods>
+            </coupon>
+       </resources>
+        <acl>
+            <resources>
+                <coupon translate="title" module="coupon">
+                    <title>Coupon</title>
+                    <sort_order>5</sort_order>
+                </coupon>
+            </resources>
+        </acl>
+    </api>
+</config>

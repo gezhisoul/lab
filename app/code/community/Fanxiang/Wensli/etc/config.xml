@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Fanxiang_Wensli>
+      <version>
+        0.0.1
+      </version>
+    </Fanxiang_Wensli>
+  </modules>
+
+  <frontend>
+    <routers>
+      <fanxiang_wensli>
+        <use>standard</use>
+        <args>
+          <module>Fanxiang_Wensli</module>
+          <frontName>fanxiang_wensli</frontName>
+        </args>
+      </fanxiang_wensli>
+    </routers>
+    <layout>
+      <updates>
+        <fanxiang_wensli module="Fanxiang_Wensli">
+          <file>fanxiang_wensli.xml</file>
+        </fanxiang_wensli>
+      </updates>
+    </layout>
+  </frontend>
+
+  <global>
+    <page>
+      <layouts>
+        <frontpage_header_only module="page" translate="label">
+          <label>Frontpage layout</label>
+          <template>page/frontpage-header-only.phtml</template>
+        </frontpage_header_only>
+      </layouts>
+    </page>
+    <helpers>
+      <wensli>
+        <class>
+          Fanxiang_Wensli_Helper
+        </class>
+      </wensli>
+    </helpers>
+    <blocks>
+      <wensli>
+        <class>Fanxiang_Wensli_Block</class>
+      </wensli>
+    </blocks>
+  </global>
+</config>

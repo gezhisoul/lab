@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Fanxiang_Advertising>
+            <version>0.1.0</version>
+        </Fanxiang_Advertising>
+    </modules>
+    <frontend>
+        <routers>
+            <advertising>
+                <use>standard</use>
+                <args>
+                    <module>Fanxiang_Advertising</module>
+                    <frontName>advertising</frontName>
+                </args>
+            </advertising>
+        </routers>
+
+    </frontend>
+    <adminhtml>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <advertising>
+                                            <title>首页轮播图</title>
+                                        </advertising>
+                                        <product_tag>
+                                            <title>产品图片标签</title>
+                                        </product_tag>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>   
+    <global>
+
+         <helpers>
+            <advertising>
+                <class>Fanxiang_Advertising_Helper</class>
+            </advertising>
+        </helpers>
+    </global>
+</config>

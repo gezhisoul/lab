@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+@author wangxianbin@vanthink.net
+-->
+<widgets>
+  <catalog_product_list_category type="wensli/product_list_widget_category">
+    <name>Product List By Category</name>
+    <description>Product List By Category</description>
+
+    <parameters>
+      <count translate="label">
+        <visible>1</visible>
+        <label>Count</label>
+        <type>text</type>
+        <description>If empty, 3 will be used</description>
+      </count>
+
+      <category_id translate="label">
+        <visible>1</visible>
+        <required>1</required>
+        <label>Category</label>
+        <type>label</type>
+        <helper_block>
+          <type>adminhtml/catalog_category_widget_chooser</type>
+          <data>
+            <button translate="open">
+              <open>Select Category...</open>
+            </button>
+          </data>
+        </helper_block>
+      </category_id>
+
+      <template translate="label">
+        <label>Template</label>
+        <visible>1</visible>
+        <type>select</type>
+        <value>catalog/product/list/frontpage.phtml</value>
+        <values>
+          <default translate="label">
+            <value>catalog/product/list/common.phtml</value>
+            <label>common category product block</label>
+          </default>
+          <dropdown-menu translate="label">
+            <value>catalog/product/list/menu.phtml</value>
+            <label>dropdown menu block</label>
+          </dropdown-menu>
+          <silder-box translate="label">
+            <value>catalog/product/list/sliderbox.phtml</value>
+            <label>slider box block</label>
+          </silder-box>
+          <customer-buy translate="label">
+            <value>catalog/product/list/left.phtml</value>
+            <label>last other customer buy</label>
+          </customer-buy>
+        </values>
+      </template>
+    </parameters>
+
+  </catalog_product_list_category>
+</widgets>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Fanxiang_Fotile>
+      <version>
+        0.0.1
+      </version>
+    </Fanxiang_Fotile>
+  </modules>
+
+  <frontend>
+    <routers>
+      <fanxiang_fotile>
+        <use>standard</use>
+        <args>
+          <module>Fanxiang_Fotile</module>
+          <frontName>fanxiang_fotile</frontName>
+        </args>
+      </fanxiang_fotile>
+    </routers>
+    <layout>
+      <updates>
+        <fanxiang_fotile module="Fanxiang_Fotile">
+          <file>fanxiang_fotile.xml</file>
+        </fanxiang_fotile>
+      </updates>
+    </layout>
+  </frontend>
+
+  <global>
+    <page>
+      <layouts>
+        <frontpage_header_only module="page" translate="label">
+          <label>Frontpage layout</label>
+          <template>page/frontpage-header-only.phtml</template>
+        </frontpage_header_only>
+      </layouts>
+    </page>
+    <helpers>
+      <fotile>
+        <class>
+          Fanxiang_Fotile_Helper
+        </class>
+      </fotile>
+    </helpers>
+    <blocks>
+      <fotile>
+        <class>Fanxiang_Fotile_Block</class>
+      </fotile>
+    </blocks>
+  </global>
+</config>

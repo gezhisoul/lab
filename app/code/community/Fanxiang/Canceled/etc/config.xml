@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Canceled>
+            <version>1.0.0</version>
+        </Fanxiang_Canceled>
+    </modules>
+    
+    <global>
+        <helpers>
+            <canceled>
+                <class>Fanxiang_Canceled_Helper</class>
+            </canceled>
+        </helpers>      
+        <models>
+            <canceled>
+                <class>Fanxiang_Canceled_Model</class>
+                <resourceModel>canceled_mysql4</resourceModel>
+            </canceled>
+        </models>
+    </global>
+    <frontend>
+        <routers>
+            <data>
+                <use>standard</use>
+                <args>
+                    <module>Fanxiang_Canceled</module>
+                    <frontName>canceled</frontName>
+                </args>
+            </data>
+        </routers>
+    </frontend>
+    <adminhtml>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <canceled>
+                                            <title>canceled</title>
+                                        </canceled>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <!--Dipper-->
+             <get_order_from_canceled>
+                 <schedule><cron_expr>*/60 * * * *</cron_expr></schedule>
+                 <run><model>canceled/order::getCanceled</model></run>
+            </get_order_from_canceled> 
+        </jobs>
+    </crontab>
+</config>

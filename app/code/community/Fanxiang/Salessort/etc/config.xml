@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Salessort>
+            <version>1.0.0</version>
+        </Fanxiang_Salessort>
+    </modules>
+    
+    <global>
+    
+        <helpers>
+            <salessort>
+                <class>Fanxiang_Salessort_Helper</class>
+            </salessort>
+        </helpers>        
+        <models>
+
+        </models>
+
+
+    </global>
+    <frontend>
+          <events>
+          <!--订单生成时刷新部分产品的销量 -->
+          <checkout_type_onepage_save_order_after>
+    				<observers>
+    					<refresh_sales_to_product>
+    						<type>model</type>
+    						<class>Fanxiang_Salessort_Helper_Data</class>
+    						<method>refreshSales</method>
+    					</refresh_sales_to_product>
+    				</observers>
+      		</checkout_type_onepage_save_order_after>
+          </events>
+    </frontend>
+
+    
+</config>

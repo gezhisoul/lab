@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <qlogin translate="label" module="qlogin">
+            <label>QQ登录</label>
+            <sort_order>250</sort_order>
+        </qlogin>
+    </tabs>
+    <sections>
+		<qlogin translate="label" module="qlogin">
+            <label>QQ登录</label>
+            <tab>qlogin</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+ 
+              <key translate="label"> 
+              <label>QQ密钥</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                    <aid translate="label">
+                     <label>QQ_AID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                     </aid>
+                     <skey translate="label">
+                     <label>QQ_SKEY</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                     </skey>
+                     <callback translate="label">
+                     <label>CALLBACK</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                     </callback>
+                     
+                    </fields>
+               </key>
+            </groups>
+        </qlogin>
+    </sections>
+</config>

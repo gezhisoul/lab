@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Fxlayer>
+            <version>1.0.0</version>
+        </Fanxiang_Fxlayer>
+    </modules>
+    
+    <global>
+        <blocks>
+            <fxlayer>
+                <class>Fanxiang_Fxlayer_Block</class>
+            </fxlayer>
+        </blocks>     
+        <helpers>
+            <fxlayer>
+                <class>Fanxiang_Fxlayer_Helper</class>
+            </fxlayer>
+        </helpers>        
+        <models>
+            <fxlayer>
+                <class>Fanxiang_Fxlayer_Model</class>
+                <resourceModel>fxlayer_mysql4</resourceModel>
+            </fxlayer>
+
+        </models>
+         		<resources>
+        			<fxlayer_setup>
+        				<setup>
+        					<module>Fanxiang_Fxlayer</module>
+        					<class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+        				</setup>
+        				<connection>
+        					<use>default_setup</use>
+        				</connection>
+        			</fxlayer_setup>
+        		</resources>
+
+    </global>
+    
+    <frontend>
+        <routers>
+         <fxlayer>
+            <use>standard</use>
+            <args>
+               <module>Fanxiang_Fxlayer</module>
+               <frontName>fxlayer</frontName>
+            </args>
+         </fxlayer>
+        </routers>
+        <layout>
+            <updates>
+                <fxlayer>
+                    <file>fxlayer.xml</file>
+                </fxlayer>
+            </updates>
+        </layout>
+        </frontend> 
+    
+</config>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Reviewyes>
+            <version>1.0.0</version>
+        </Fanxiang_Reviewyes>
+    </modules>
+    
+    <global>
+        <models>
+            <reviewyes>
+                <class>Fanxiang_Reviewyes_Model</class>
+                <resourceModel>reviewyes_mysql4</resourceModel>
+            </reviewyes>
+            <reviewyes_mysql4> 
+                <class>Fanxiang_Reviewyes_Model_Resource_Mysql4</class>
+                <entities>
+                    <sessionpost>
+                        <table>review_yes</table>
+                    </sessionpost>
+                </entities> 
+            </reviewyes_mysql4> 
+        </models>
+        
+        <helpers>
+            <reviewyes>
+                <class>Fanxiang_Reviewyes_Helper</class>
+            </reviewyes>
+        </helpers>
+        
+    </global>
+    
+    
+    <frontend>
+        <routers>
+             <reviewyes>
+                <use>standard</use>
+                <args>
+                   <module>Fanxiang_Reviewyes</module>
+                   <frontName>reviewyes</frontName>
+                </args>
+             </reviewyes>
+        </routers>
+        
+        <events>
+
+            <checkout_type_onepage_save_order_after><!--下单之后-->
+               <observers>
+                    <savereview>
+                    	<type>model</type>
+                    	<class>Fanxiang_Reviewyes_Helper_Data</class>
+                    	<method>savereview</method>
+                    </savereview>
+                </observers>
+            </checkout_type_onepage_save_order_after>
+            
+            <review_save_after>
+               <observers>
+                    <reviewpost>
+                    	<type>model</type>
+                    	<class>Fanxiang_Reviewyes_Helper_Data</class>
+                    	<method>reviewpost</method>
+                    </reviewpost>
+                </observers>
+            </review_save_after> 
+        </events>
+    </frontend> 
+    
+    
+    
+    
+</config>

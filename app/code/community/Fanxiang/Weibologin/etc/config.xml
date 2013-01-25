@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Fanxiang_Weibologin>
+            <version>1.0.0</version>
+        </Fanxiang_Weibologin>
+    </modules>
+    
+    <global>
+        <blocks>
+            <weibologin>
+                <class>Fanxiang_Weibologin_Block</class>
+            </weibologin>
+        </blocks>     
+        <helpers>
+            <weibologin>
+                <class>Fanxiang_Weibologin_Helper</class>
+            </weibologin>
+        </helpers>        
+        <resources>
+        			<weibologin_setup>
+        				<setup>
+        					<module>Fanxiang_Weibologin</module>
+        					<class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+        				</setup>
+        				<connection>
+        					<use>default_setup</use>
+        				</connection>
+        			</weibologin_setup>
+        		</resources>
+
+
+    </global>
+    
+    <frontend>
+        <routers>
+         <weibologin>
+            <use>standard</use>
+            <args>
+               <module>Fanxiang_Weibologin</module>
+               <frontName>weibologin</frontName>
+            </args>
+         </weibologin>
+        </routers>
+                 <layout>
+            <updates>
+                <weibologin>
+                    <file>weibologin.xml</file>
+                </weibologin>
+            </updates>
+        </layout> 
+        <events>
+         
+          <customer_login>
+    				<observers>
+    					<bind_with_weibo>
+    						<type>model</type>
+    						<class>Fanxiang_Weibologin_Helper_Data</class>
+    						<method>loginBindweibo</method>
+    					</bind_with_weibo>
+    				</observers>
+      		</customer_login>
+          
+          <customer_register>
+    				<observers>
+    					<register_bind_with_weibo>
+    						<type>model</type>
+    						<class>Fanxiang_Weibologin_Helper_Data</class>
+    						<method>registerBindweibo</method>
+    					</register_bind_with_weibo>
+    				</observers>
+      		</customer_register>
+          
+      </events>
+        </frontend> 
+            <adminhtml>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <weibologin>
+                                            <title>新浪微博登录</title>
+                                        </weibologin>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml> 
+</config>
