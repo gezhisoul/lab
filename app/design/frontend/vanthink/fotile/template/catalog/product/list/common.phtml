@@ -5,8 +5,8 @@
    $productCollection = $this->getLoadedProductCollection();
 ?>
 
-<div class="esp-product">
-  <h2 class="hasMore posr"><?php print ($currentCategory = $this->getCurrentCategory())?$currentCategory->getName():''?><a class="fr fwn" href="">更多</a><b>&nbsp;</b></h2>
+<div class="esp-product cf">
+  <h2 class="hasMore posr"><?php print ($currentCategory = $this->getCurrentCategory())?$currentCategory->getName():''?><a class="fwn" href="#">更多</a><b>&nbsp;</b></h2>
   <?php if ($productCollection->count()>0):?>
   <?php $_collectionSize = $productCollection->count() ?>
   <?php $_columnCount = $this->getColumnCount(); ?>

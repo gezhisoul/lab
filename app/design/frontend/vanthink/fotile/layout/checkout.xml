@@ -41,6 +41,9 @@ Default layout, loads most of the pages
                 <action method="addCheckoutLink"></action>
             </block>
         </reference>
+        <reference name="head">
+        <action method="addCss"><stylesheet>css/checkout.css</stylesheet></action>
+    </reference>
         <reference name="header">
             <block type="checkout/cart_sidebar" name="cart_sidebar_mini" template="checkout/cart/sidebar.phtml" before="-">
                 <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>

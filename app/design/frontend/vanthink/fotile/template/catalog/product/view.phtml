@@ -37,6 +37,22 @@
 ?>
 <div class="wrapper_border">
   <div class="product-view">
+    <div class="productUp posr cf">
+       <!-- <div class="sintantCart">
+      <p class="sintantTop"><a class="fr curp closeCart" href="javascript:history.go()">关闭</a><span class="addNumber cartSucceed">0</span><label>件已商品加入购物车</label></p>
+      <div class="sintantDetail cartSucceed">
+        <p class="fwb col000"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></p>
+        <p><label>总计数量</label><span class="addToBuy">0</span></p>
+        <p><label>总计金额</label><span class="finallyToBuy">0</span></p>
+         <div class="cartOperation">
+        <a href="javascript:history.go()" class="continueBuy"></a>
+        <a href="/checkout/cart/" class="checkNow"></a>
+      </div>
+      </div>
+      <div class="cartFail sintantDetail" style="display:none;">
+        <p class="fwb col000">加入购物车失败</p>
+      </div>
+    </div> -->
     <div class="product-essential fr">
       <?php $enctype = ''?>
       <?php if($_product->getOptions()):?>
@@ -171,6 +187,7 @@
       </div>
       <!-- JiaThis Button END -->
     </div>
+  </div>
     <?php if ($_product->isSaleable()):?>
     <div class="product-collateral">
       <?php echo $this->getChildHtml('recommend_products') ?>
@@ -203,7 +220,14 @@
         <?php endforeach;?>
         <?php print $_product->getDescription();?>
         <?php echo $this->getChildHtml('product_review') ?>
-        <?php echo $this->getChildHtml('productquestions') ?>
+        <div class="offline-product storeContect">
+              <a href="javascript:void(0);" class="offContect"></a>
+              <label>请填写您的联系信息，我们将第一时间联系您。</label>
+            </div>
+        <div class="storeQuestion">
+    <?php echo $this->getChildHtml('productquestions') ?>
+    <div class="closeQuestion"></div>
+    </div>
       </div>
       <div style="display: none;" id="tbc_02">
         <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
@@ -218,31 +242,23 @@
         <?php endforeach;?>
         <?php print $_product->getDescription();?>
         <?php echo $this->getChildHtml('product_review') ?>
-        <?php echo $this->getChildHtml('productquestions') ?>
+         <div class="storeQuestion">
+    <?php echo $this->getChildHtml('productquestions') ?>
+    <div class="closeQuestion"></div>
+    </div>
       </div>
       <div style="display: none;" id="tbc_03">
         <?php echo $this->getChildHtml('productquestions') ?>
       </div>
       <div style="display: none;" id="tbc_04">
         <?php echo $this->getChildHtml('product_review') ?>
-        <?php echo $this->getChildHtml('productquestions') ?>
+         <div class="storeQuestion">
+    <?php echo $this->getChildHtml('productquestions') ?>
+    <div class="closeQuestion"></div>
+    </div>
       </div>
     </div>
     <?php else: // 不可销售产品（门店商品的详细介绍部分）?>
-    <script type="text/javascript">
-    jQuery(function(){
-      var storeQuestion=jQuery('.storeQuestion');
-        jQuery('.offContect').click(function(){
-          jQuery(storeQuestion).show();
-           jQuery('.back-to').after("<div id='onestepcheckout_popup_overlay'></div>");
-        })
-      jQuery('.closeQuestion').click(function(){
-        jQuery(storeQuestion).hide();
-        jQuery('#onestepcheckout_popup_overlay').remove();
-      });
-
-    })
-    </script>
     <div class="storeQuestion">
     <?php echo $this->getChildHtml('productquestions') ?>
     <div class="closeQuestion"></div>
@@ -330,19 +346,52 @@
   <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
   <?php echo $this->getChildHtml('product_additional_data') ?>
 </div>
+
 <script type="text/javascript">
 var productAddToCartForm = new VarienForm('product_addtocart_form');
 var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 jQuery(document).ready(function() {
-    productAddToCartForm.submit = function(button){
-        if (this.validator.validate()) {
-            this.form.submit();
-            if (button && button != 'undefined') {
-                button.disabled = true;
-            }
-        }
-    }.bind(productAddToCartForm);
-
+var urls=jQuery('#product_addtocart_form').attr('action');
+var finallyToBuy=jQuery('.finallyToBuy');
+var addToBuy=jQuery('.addToBuy');
+var clickBuy=jQuery('.about-products .btn-cart');
+var cartFail=jQuery('.cartFail p');
+var sintantTop=jQuery('.sintantTop').children('label');
+    clickBuy.click(function(){
+      productAddToCartForm.submit();
+      // jQuery('#ajax_cart_overlay').show();
+      // var pickNumber=jQuery('#qty').val();
+      // jQuery('.addNumber').html(pickNumber);
+      //   if (productAddToCartForm.validator.validate()) {
+      //       jQuery.ajax({
+      //         url: urls,
+      //         data: jQuery('#product_addtocart_form').serialize(),
+      //         dataType:'html',
+      //         success:function(data){ 
+      //           if(!data.error){
+      //              jQuery('.sintantCart').show();
+      //                finallyToBuy.html(data.grandTotal);
+      //                addToBuy.html(data.qty);
+      //                jQuery('#ajax_cart_overlay').hide();
+      //           }else{  
+      //             cartFail.html(data.message);             
+      //             sintantTop.html('加入购物车失败');
+      //             jQuery('.sintantCart').show();
+      //             jQuery('.cartSucceed').hide();
+      //             jQuery('.cartFail').show();
+      //             jQuery('#ajax_cart_overlay').hide();
+      //           }
+      //         },
+      //         error:function(){
+      //            jQuery('.sintantCart').show();
+      //             jQuery('.cartSucceed').hide();
+      //             jQuery('.cartFail').show();
+      //             jQuery('#ajax_cart_overlay').hide();
+      //         }
+      //       });
+           
+      //   }
+    })
     var product_title = jQuery("#product_title");
     var product_title_top = product_title.offset().top;
     reset_product_title_top(product_title, product_title_top);
@@ -369,4 +418,22 @@ jQuery(document).ready(function() {
             jQuery("html,body").animate({scrollTop:topY});
         }
     }
+    jQuery(function() {
+})
+</script>
+<script type="text/javascript">
+    jQuery(function(){
+      var storeQuestion=jQuery('.storeQuestion');
+      var offContect=jQuery('.offContect');
+      var sy=offContect.offset().top;
+      storeQuestion.css('top',sy-230);
+        offContect.click(function(){
+           storeQuestion.show();
+           jQuery('.back-to').after("<div id='onestepcheckout_popup_overlay'></div>");
+        })
+      jQuery('.closeQuestion').click(function(){
+        storeQuestion.hide();
+        jQuery('#onestepcheckout_popup_overlay').remove();
+      });
+    })
 </script>

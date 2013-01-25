@@ -48,7 +48,9 @@ Supported layout update handles (special):
     <reference name="top.menu">
       <block type="catalog/navigation" name="catalog.topnav" template="catalog/navigation/top.phtml"/>
     </reference>
-
+     <reference name="head">
+        <action method="addCss"><stylesheet>css/catalog.css</stylesheet></action>
+    </reference>
     <reference name="footer">
       <block type="catalog/product_compare_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
     </reference>
@@ -89,7 +91,6 @@ Supported layout update handles (special):
         <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
           <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
             <block type="page/html_pager" name="product_list_toolbar_pager"/>
-
           </block>
           <block type="catalog/product_list_toolbar" name="product_list_toolbar_no_order" template="catalog/product/list/toolbar_no_order.phtml">
             <block type="page/html_pager" name="product_list_toolbar_pager1"/>
@@ -204,17 +205,10 @@ Supported layout update handles (special):
       <!-- jerry 假分页 end -->
 
 
-      <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
-      <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
-      <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
     </reference>
     <reference name="content">
       <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
-        <!--
-            <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
-            <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
-            <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
-        -->
+      
         <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
         <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
           <label>Alert Urls</label>
@@ -474,5 +468,4 @@ Supported layout update handles (special):
       <block type="catalog/seo_searchterm" name="seo.searchterm" template="catalog/seo/searchterm.phtml"/>
     </reference>
   </catalog_seo_searchterm_popular>
-
 </layout>

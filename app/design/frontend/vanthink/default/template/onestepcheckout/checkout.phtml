@@ -1254,8 +1254,6 @@ document.observe('dom:loaded', function() {
     $$('.cvv-what-is-this').each(function(element){
         Event.observe(element, 'click', toggleToolTip);
     });
-
-
 });
 
 function toggleToolTip(event){
@@ -1285,7 +1283,7 @@ jQuery(document).ready(function(){
       var userName=$(this).val();
         $("input[name='billing[firstname]']").val(userName.substring(0,1));
           $("input[name='billing[lastname]']").val(userName.substring(1,userName.length));
-    })
+    });
      jQuery('#type_invoice').change(function() {
         if (jQuery(this).val()==2) {
             jQuery('#invoice_form_panel').hide();

@@ -33,7 +33,7 @@
 ?>
 <div class="account-create">
     <div class="page-title">
-        <h1 class="micya"><strong>新会员</strong><b class="coyel">注册</b><span class="fr">如果还不是方太商城用户，请从这里注册</span></h1>
+        <h1 class="micya"><strong class="fl">新会员</strong><b class="coyel fl">注册</b><span class="fr">如果还不是方太商城用户，请从这里注册</span></h1>
     </div>
     <?php echo $this->getChildHtml('form_fields_before')?>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
@@ -63,7 +63,7 @@
                 <li>
                     <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?>：</label>
                         <div class="input-box">
-                            <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
+                            <input type="password" autocomplete="off" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
                         </div>
                          <span class="note">两次输入的密码要一致。</span>
                 </li>

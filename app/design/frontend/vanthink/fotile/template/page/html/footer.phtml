@@ -30,7 +30,7 @@
       <div class="attention fr">
         <?php print $this->getChildHtml('footer.newsletter'); ?>
         </div>
-        <div class="foot-info">
+        <div class="foot-info fl">
       <a href="/helpCenter/">新手指南</a>
       <a href="/regOrder/">购物流程</a>
       <a href="/regOrder/">售后服务</a>
@@ -52,22 +52,20 @@
       <a href="http://www.fotile.com/">www.fotile.com</a>
     </div>
 </footer>
-<div class="browserWarn" style="display: none;">
-  您好，你正在使用的浏览器（IE6、IE7、IE8）对本网站的兼容存在问题。请尽快更新到IE9、IE10，或者使用其他优秀的浏览器访问，如：Google Chrome、Firefox、Safari
-</div>
-<div class="back-to">
-  <div class="close-to"></div>
-  <div class="cus-ser"></div>
-  <div id="toTop"></div>
-</div>
+<!-- <div class="browserWarn" style="display: none;">
+  您好，你正在使用的浏览器（IE6、IE7、IE8）。请尽快更新到IE9、IE10，或者使用其他优秀的浏览器以达到最佳效果，如：Google Chrome、Firefox、Safari
+</div> -->
+<a class="back-to" id="toTop">
+</a>
 <?php echo $this->getChildHtml('catalog.compare.sidebar')?>
+<div id="ajax_cart_overlay"><div id="ajax_loading"></div></div>
 <script type="text/javascript">
 jQuery(function() {
     var product_title = jQuery(".back-to");
     var product_title_top = product_title.offset().top;
     reset_product_title_top(product_title, product_title_top);
     jQuery(window).scroll(function() {
-        reset_product_title_top(product_title, product_title_top);
+        iset_product_title_top(product_title, product_title_top);
     });
     product_title.click(function(){
       jQuery('html, body').animate({
@@ -76,6 +74,17 @@ jQuery(function() {
     700)
     })
 });
+function iset_product_title_top(product_title, product_title_top){
+    var windowHeight=jQuery(window).height()*0.8;
+    var document_scroll_top = jQuery(document).scrollTop()+windowHeight;
+    if (document_scroll_top > product_title_top) {
+        product_title.css('top', document_scroll_top);
+    }
+    if (document_scroll_top <= product_title_top) {
+        product_title.css('top', product_title_top);
+    }
+}
+
 function reset_product_title_top(product_title, product_title_top){
     var document_scroll_top = jQuery(document).scrollTop();
     if (document_scroll_top > product_title_top) {

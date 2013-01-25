@@ -115,9 +115,13 @@ Default layout, loads most of the pages
             <block type="core/text_list" name="before_body_end" as="before_body_end" translate="label">
                 <label>Page Bottom</label>
             </block>
+            <block type="core/text_list" name="popup" as="popup" translate="label">
+              <label>Popup div container</label>
+            </block>
         </block>
 
         <block type="core/profiler" output="toHtml" name="core_profiler"/>
+
     </default>
 
     <print translate="label" module="page">

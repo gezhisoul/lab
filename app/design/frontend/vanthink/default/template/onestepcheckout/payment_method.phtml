@@ -140,6 +140,7 @@ if(cBalance){
 payment.currentMethod = "<?php echo $this->getQuote()->getPayment()->getMethod() ?>";
 //]]>
 jQuery(function(){
+    var aliten=jQuery('.form-list li');
     var tencentAll=jQuery('.form-list li').not(':first');
     var tencent=jQuery('.form-list li').eq(1).children('div').children('input');
     tencentAll.click(function(){ 
@@ -147,7 +148,7 @@ jQuery(function(){
     })
     var tencentFirst=jQuery('.form-list li').eq(0);
     tencentFirst.click(function(){
-    tencent.attr('checked',false);
+    tencentAll.find('input').attr('checked',false);
     })
     var tencentSecond=jQuery('.form-list li').eq(1);
     tencentSecond.click(function(){
@@ -155,3 +156,13 @@ jQuery(function(){
     })
 })
 </script>
+<!--[if IE]>
+ <script type="text/javascript">   
+    jQuery(function(){
+    var aliten=jQuery('.form-list li');
+    aliten.click(function(){
+        jQuery(this).find('input').attr('checked','checked');
+    })
+    })
+ </script>
+<![endif]-->

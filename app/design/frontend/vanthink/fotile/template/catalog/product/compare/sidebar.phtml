@@ -35,19 +35,19 @@
     </div>
     <div class="block-content">
     <?php if($this->helper('catalog/product_compare')->getItemCount()>0): ?>
-        <ol id="compare-items">
+        <ol id="compare-items" class="cf">
         <?php foreach($this->helper('catalog/product_compare')->getItemCollection() as $_index=>$_item): ?>
-            <li class="item">
+            <li class="item cf fl">
                 <input type="hidden" class="compare-item-id" value="<?php echo $_item->getId() ?>" />
                 <a href="<?php echo $this->helper('catalog/product_compare')->getRemoveUrl($_item) ?>" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove fr" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the compare products?') ?>');"></a>
-                <p class="product-name"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></p>
+                <p class="product-name fl"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></p>
             </li>
         <?php endforeach; ?>
         </ol>
         <script type="text/javascript">decorateList('compare-items')</script>
         <div class="actions">
-            <span><a href="<?php echo $this->helper('catalog/product_compare')->getClearListUrl() ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove all products from your comparison?') ?>');">删除全部</a></span>
-            <button style="line-height:24px;" type="button" title="<?php echo $this->__('Compare') ?>" class="button fr" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')"><span><span class="coyel">对比</span></span></button>
+            <a class="fl" href="<?php echo $this->helper('catalog/product_compare')->getClearListUrl() ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove all products from your comparison?') ?>');">删除全部</a>
+            <button style="line-height:24px;" type="button" title="<?php echo $this->__('Compare') ?>" class="button coyel fr" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')"><span>对比</span></button>
         </div>
     <?php else: ?>
         <p class="empty"><?php echo $this->__('You have no items to compare.') ?></p>
