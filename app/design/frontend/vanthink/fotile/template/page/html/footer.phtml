@@ -62,10 +62,12 @@
 <script type="text/javascript">
 jQuery(function() {
     var product_title = jQuery(".back-to");
-    var product_title_top = product_title.offset().top;
-    reset_product_title_top(product_title, product_title_top);
     jQuery(window).scroll(function() {
-        iset_product_title_top(product_title, product_title_top);
+      if(jQuery(this).scrollTop()!=0){
+          product_title.fadeIn();
+      }else{
+          product_title.fadeOut();
+      }  
     });
     product_title.click(function(){
       jQuery('html, body').animate({
@@ -74,16 +76,6 @@ jQuery(function() {
     700)
     })
 });
-function iset_product_title_top(product_title, product_title_top){
-    var windowHeight=jQuery(window).height()*0.8;
-    var document_scroll_top = jQuery(document).scrollTop()+windowHeight;
-    if (document_scroll_top > product_title_top) {
-        product_title.css('top', document_scroll_top);
-    }
-    if (document_scroll_top <= product_title_top) {
-        product_title.css('top', product_title_top);
-    }
-}
 
 function reset_product_title_top(product_title, product_title_top){
     var document_scroll_top = jQuery(document).scrollTop();

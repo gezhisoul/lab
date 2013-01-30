@@ -187,7 +187,6 @@ header{
     width: 254px;
 }
 .search-area{
-    width: 260px;
     height: 52px;
     overflow: hidden;
     margin-top: 12px;
@@ -215,8 +214,6 @@ header{
     background: url(../images/search.png) no-repeat left center;
 }
 .search-area ul{
-    width: 260px;
-    *width:268px;
     overflow: hidden;
     margin-top: 4px;
 }
@@ -551,18 +548,24 @@ footer a,footer span{
     padding-left: 10px;
 }
 .back-to{
-    display: block;
+    display: none;
     width:46px;
     height: 46px;
     overflow:hidden;
-    position: absolute;
-    top:630px;
+    position: fixed;
+    bottom: 8%;
     z-index:99;
-    right:2%;
+    right:4%;
     cursor:pointer;
     background-image: url(../images/back-top.gif);
     background-position: 0 0;
     background-repeat: no-repeat;
+    _position:absolute;
+    _bottom:auto;
+    _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-130));
+}
+.back-to:hover{
+    background-position: 0 -47px;
 }
 .open-to{
     background: url(../images/toshow.png) no-repeat;
