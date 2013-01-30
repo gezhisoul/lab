@@ -8,6 +8,33 @@
     </Fanxiang_Fotile>
   </modules>
 
+  <global>
+    <page>
+      <layouts>
+        <frontpage_header_only module="page" translate="label">
+          <label>Frontpage layout</label>
+          <template>page/frontpage-header-only.phtml</template>
+        </frontpage_header_only>
+      </layouts>
+    </page>
+    <helpers>
+      <fotile>
+        <class>Fanxiang_Fotile_Helper</class>
+      </fotile>
+    </helpers>
+    <models>
+      <fotile>
+        <class>Fanxiang_Fotile_Model</class>
+      </fotile>
+    </models>
+    <blocks>
+      <fotile>
+        <class>Fanxiang_Fotile_Block</class>
+      </fotile>
+    </blocks>
+
+  </global>
+
   <frontend>
     <routers>
       <fanxiang_fotile>
@@ -25,28 +52,17 @@
         </fanxiang_fotile>
       </updates>
     </layout>
+    <events>
+      <checkout_submit_all_after>
+        <observers>
+          <fotile_order_success>
+            <class>fotile/observer</class>
+            <method>clearCheckoutItems</method>
+          </fotile_order_success>
+        </observers>
+      </checkout_submit_all_after>
+    </events>
   </frontend>
 
-  <global>
-    <page>
-      <layouts>
-        <frontpage_header_only module="page" translate="label">
-          <label>Frontpage layout</label>
-          <template>page/frontpage-header-only.phtml</template>
-        </frontpage_header_only>
-      </layouts>
-    </page>
-    <helpers>
-      <fotile>
-        <class>
-          Fanxiang_Fotile_Helper
-        </class>
-      </fotile>
-    </helpers>
-    <blocks>
-      <fotile>
-        <class>Fanxiang_Fotile_Block</class>
-      </fotile>
-    </blocks>
-  </global>
+
 </config>

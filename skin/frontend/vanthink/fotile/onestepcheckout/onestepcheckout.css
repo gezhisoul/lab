@@ -373,6 +373,7 @@ div.onestepcheckout-comments textarea {
 #invoice_form_panel input{
     border: 1px solid #ADADAD;
     height: 24px;
+    padding-left: 4px;
     line-height: 24px;
 }
 #type_invoice{

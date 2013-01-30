@@ -35,6 +35,7 @@
     $_helper = $this->helper('catalog/output');
     $_product = $this->getProduct();
 ?>
+<script type="text/javascript" src="/js/LocalList.js"></script>
 <div class="wrapper_border">
   <div class="product-view">
     <div class="productUp posr cf">
@@ -71,15 +72,7 @@
             <div class="product-summary">
               <?php echo $this->getChildHtml('alert_urls') ?>
               <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-              <!--<style>
-                .deliveryArea select{
-                  width: 70px;
-                  margin: 0 6px;
-                }
-              </style>
-               <div class="deliveryArea">
-                <span>配送范围：</span><select><option>上海</option></select>省<select></select>市<select></select>
-              </div> -->
+            
               <?php echo $this->getChildHtml('extrahint') ?>
               <div class="pro-ser"><label>服务：</label><span>由方太官方 发送并提供售后服务。</span></div>
             </div>
@@ -89,6 +82,21 @@
             <div class="product-type-data">
               <?php echo $this->getChildHtml('product_type_data') ?>
             </div>
+               <div class="deliveryArea">
+                <span>配送范围：</span>
+                <script type="text/javascript">
+                    var options = {
+                      country: 'province',        // “省”下拉列表的名称
+                        state: 'city',            // “市”下拉列表的名称
+                        city: 'area',            // “区”下拉列表的名称
+                        current: '',        // 当前默认值，用管道符“|”分割
+                        language: 'zh_cn',        // 数据文件的语言
+                        path_to_xml: '/js/data/china/',    // 数据文件的目录
+                        read_only: false        // 数据是否只读，若设置为true，则无需设置 country 
+                    };
+                    LocalList.mf_init(options);
+                </script>
+              </div> 
             <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
             <?php if ($alias <> 'description'): ?>
             <div class="basicAttr cf mtb10">

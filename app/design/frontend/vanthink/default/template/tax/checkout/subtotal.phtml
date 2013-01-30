@@ -29,7 +29,7 @@
  */
 ?>
 <?php if ($this->displayBoth()):?>
-<li class="fr">
+<li>
    
         <?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?>
    
@@ -37,7 +37,7 @@
         <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueExclTax()) ?>
    
 </li>
-<li class="fr">
+<li>
     <span style="<?php echo $this->getStyle() ?>" class="a-right">
         <?php echo $this->helper('tax')->__('Subtotal (Incl. Tax)') ?>
     </span>
@@ -46,7 +46,7 @@
    
 </li>
 <?php else : ?>
-<li class="fr">
+<li>
     <span style="<?php echo $this->getStyle() ?>" class="a-right">
         <?php echo $this->getTotal()->getTitle() ?>
     </span>

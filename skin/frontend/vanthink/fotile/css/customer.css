@@ -280,7 +280,7 @@ button#button_send_to_friend{float:right;font-weight:bold;margin-right:52px;back
 .account_layout .addresses-list,.order_details_page{padding:20px;line-height:22px}
 .addresses-primary h2,.addresses-additional h2,.box-title h2,.accout_dashboard h3{margin:10px 0;font-weight:bold;font-size:12px;}
 .account_layout .addresses-list .col-1,.account_layout .addresses-list .col-2,.order-info-box .col-1,.order-info-box .col-2,.box-info .col2-set{float:left;overflow:hidden;width:48%;padding-right:10px;}
-#region_id,#city,#district{height:25px;line-height:25px}
+#region_id,.form-list #city,#district{height:25px;line-height:25px}
 #advice-required-entry-city,#advice-required-entry-district{margin-left:88px}
 .order_details_page{padding:20px 20px 20px 30px;width:650px;overflow:hidden}
 #my-orders-table tr th,#dengdaipingjia tr th,#my-shipment-table-2 tr th{

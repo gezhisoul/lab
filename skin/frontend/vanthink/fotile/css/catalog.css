@@ -282,6 +282,10 @@
     margin-left: 0;
 }
 /*===============product=================*/
+.deliveryArea select{
+    width: 100px;
+    margin: 0 6px;
+}
 .media-box .more-views{
     width: 75px;
     float: left;

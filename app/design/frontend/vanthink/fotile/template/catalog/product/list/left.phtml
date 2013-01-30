@@ -6,6 +6,7 @@
 ?>
 
 <ul class="products-grid">
+    <?php $_columnCount = $this->getColumnCount(); ?>
    <?php $i=0;foreach ($productCollection as $product): ?>
   <?php $product = Mage::getModel('catalog/product')->load($product->getId()) ?>
   <?php $image_src = '' ?>
