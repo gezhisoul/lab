@@ -119,6 +119,7 @@
     border: 1px #d1cfcf solid;
     border-top: none;
     padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 .col-left{
     width: 239px;
@@ -158,6 +159,7 @@
     font-size: 14px;
 }
 .sorter{
+    width: 740px;
     height: 32px;
     border-top: 2px #000 solid;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#eaeaea), to(#dedcdd));
@@ -174,8 +176,9 @@
 .category-products{
     margin: 0 10px 22px 0;
 }
-.category-products ul.last{
-    margin-bottom: 10px;
+.toolbar-bottom{
+    margin-top: 10px;
+    clear: both;
 }
 .amount{
     line-height: 28px;
@@ -295,7 +298,7 @@
   width:100px;
   height:100px;
   position:absolute;
-  top: 60%;
+  top: 40%;
   left: 44%;
   background:url(../images/loader.gif) no-repeat;
 }
@@ -306,10 +309,10 @@
   position:fixed;
   top:0;
   left:0;
-  background-color:#000;
+  background-color:#FFFFFF;
   z-index:999;
   filter: alpha(opacity=50);
-  opacity: 0.5;
+  opacity: 0.7;
   z-index:999;
 }
 .sintantCart{

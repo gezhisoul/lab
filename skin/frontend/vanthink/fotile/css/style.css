@@ -130,6 +130,7 @@ article{
     box-shadow: 0 14px 20px #959595;
 }
 #header{
+    height: 143px;
     color: #b6b6b6;
     background: -webkit-radial-gradient(circle closest-side, #3b3b3b, #000 360%) -280px -20px no-repeat;
     background:-moz-radial-gradient(circle closest-side, #494949, #000 360%) -280px -20px no-repeat;
@@ -187,15 +188,16 @@ header{
     width: 254px;
 }
 .search-area{
+    width: 254px;
     height: 52px;
     overflow: hidden;
     margin-top: 12px;
 }
 .form-search{
-    border: 1px #303030 solid;
-    width: 242px;
+    width: 244px;
     height: 25px;
     padding-left: 5px;
+    border: 1px #303030 solid;
     overflow: hidden;
 }
 #search{
@@ -211,7 +213,7 @@ header{
 .form-search button{
     width: 20px;
     height: 24px;
-    background: url(../images/search.png) no-repeat left center;
+    background: url(../images/search.gif) no-repeat left center;
 }
 .search-area ul{
     overflow: hidden;
@@ -344,7 +346,7 @@ nav .nav-first a{
     top: 34px;
     width: 960px;
     height: 210px;
-    background: url(../images/drop-down.png) no-repeat;
+    background: url(../images/drop-down.gif) no-repeat;
     padding-top: 12px;
     z-index: 99;
 }
@@ -365,7 +367,7 @@ nav .nav-first a{
 .drop-down dt{
     padding-left: 12px;
     font-weight: 600;
-    background: url(../images/menu-icon.png) no-repeat left center;
+    background: url(../images/menu-icon.gif) no-repeat left center;
 }
 .drop-down section{
     float: left;
@@ -373,6 +375,7 @@ nav .nav-first a{
     height: 207px;
     margin-left: 10px;
     background: url(../images/sectionBorder.png) right center no-repeat;
+    _background:none;
 }
 .drop-down .dropdown-img{
     margin: 20px 0 0 34px;
@@ -455,7 +458,6 @@ nav .nav-first a{
 
 #features,#features img,.jshowoff{
     width: 100%;
-    height: 469px;
 }
 .jshowoff-slidelinks{
     display: none;
@@ -846,7 +848,7 @@ footer a,footer span{
     width: 662px;
 }
 .new-sales h2{
-    background-image:url(../images/new-h2.png);
+    background-image:url(../images/new-h2.gif);
     background-repeat: no-repeat;
     background-position:  6px center;
     background-color: #ededed;
@@ -1104,7 +1106,6 @@ footer a,footer span{
     _bottom: 0;
     _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
 }
-
 
 /* =============== add by wangxianbin ==============*/
 

@@ -73,9 +73,9 @@ if($helper->settings['hide_nonfree_payment_methods'])   {
     <li>
                     <input name="payment[method]" type="radio" value="alipay_payment" id="p_method_alipay_payment"/><label for="p_method_alipay_payment">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/aliPayment.png') ?>"  alt="支付宝" /></label></li><li>
                     <div style="display:none;">
-                    <input type="radio" title="财付通" name="payment[method]" value="tenpay_payment" id="p_method_tenpay_payment_ten">
+                    <input type="radio" title="财付通" name="payment[method]" value="tenpay_payment" id="p_method_tenpay_payment_ten" checked='checked'>
                      </div>
-                    <input name="payment[bank_type]" type="radio" value="" id="p_method_tenpay_payment_ten" /><label for="p_method_tenpay_payment_ten">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/tencentPayment.png') ?>"  alt="财付通" /></label> </li><li>
+                    <input name="payment[bank_type]" type="radio" value="tenpay_payment" checked='checked'  /><label for="p_method_tenpay_payment_ten">&nbsp;&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/tencentPayment.png') ?>"  alt="财付通" /></label> </li><li>
                     <input name="payment[bank_type]" type="radio" value="1001" id="btn_1001"  /><label for="btn_1001">&nbsp;<img  src="<?php echo $this->getSkinUrl('images/tenpay/jianshe.png') ?>"  /></label></li><li>
                     <input name="payment[bank_type]" type="radio" value="1002" id="btn_1002"  /><label for="btn_1002">&nbsp;<img src="<?php echo $this->getSkinUrl('images/tenpay/nongye.png') ?>" /></label></li><li>
             
@@ -143,6 +143,7 @@ jQuery(function(){
     var aliten=jQuery('.form-list li');
     var tencentAll=jQuery('.form-list li').not(':first');
     var tencent=jQuery('.form-list li').eq(1).children('div').children('input');
+    var tencentSecond=jQuery('.form-list li').eq(1);
     tencentAll.click(function(){ 
         tencent.attr('checked','checked');
     })
@@ -150,7 +151,7 @@ jQuery(function(){
     tencentFirst.click(function(){
     tencentAll.find('input').attr('checked',false);
     })
-    var tencentSecond=jQuery('.form-list li').eq(1);
+    
     tencentSecond.click(function(){
         tencentSecond.find('input').attr('checked','checked');
     })

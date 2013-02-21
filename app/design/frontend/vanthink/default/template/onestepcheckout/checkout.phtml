@@ -174,7 +174,10 @@ function selectdistrict() {
                         <input type="text" name="billing[email]" id="billing:email" value="<?php echo $this->htmlEscape($this->getAddress()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry input-text" />
                         <div class="beizhu">请输入您的邮箱</div>
                     </div>  
-                    <?php endif ?>                   
+                    <?php endif ?>
+                </li>
+                <li class="clearfix emailError" style="display:none;">
+                  
                 </li>
                     <li class="clearfix"> 
                     <?php if(!$this->settings['exclude_telephone']):?>
@@ -513,10 +516,12 @@ function selectdistrict() {
 </div>
 
     <div class="onestepcheckout-column-middle">
+        <!-- <div class="onestepcheckout-error onestepcheckout-payment-method-error" style="display:none;">
+                请选择配送方式 </div> -->
         <?php if(!$this->isVirtual()): ?>
             <div class="onestepcheckout-shipping-method">
                 <p class="onestepcheckout-numbers onestepcheckout-numbers-<?php echo $step_counter++; ?>"><?php echo $this->__('Shipping method'); ?></p>
-
+                    
                 <?php if(isset($this->formErrors['shipping_method']) && $this->formErrors['shipping_method']): ?>
                 <div class="onestepcheckout-error onestepcheckout-shipment-method-error">
                     <?php echo $this->__('Please choose a shipping method.'); ?>
@@ -524,13 +529,15 @@ function selectdistrict() {
                 <?php endif; ?>
 
                 <div class="onestepcheckout-shipping-method-block">
+                
                     <?php echo $this->getChildHtml('choose-shipping-method'); ?>
                 </div>
             </div>
         <?php endif; ?>
-
+          
         <p class="onestepcheckout-numbers onestepcheckout-numbers-<?php echo $step_counter++; ?>"><?php echo $this->__('Payment method'); ?></p>
-
+<div class="onestepcheckout-error onestepcheckout-payment-method-error" style="display:none;">
+                请选择支付方式 </div>
         <?php if(isset($this->formErrors['payment_method']) && $this->formErrors['payment_method']): ?>
         <div class="onestepcheckout-error onestepcheckout-payment-method-error">
             <?php echo $this->__('Please choose a payment method.'); ?>
@@ -1034,7 +1041,8 @@ if($$('div.input-error').length > 0) {
 <?php endif; ?>
 
 <script type="text/javascript">
-
+var emailError=jQuery('.emailError');
+var payError=jQuery('.onestepcheckout-payment-method-error');
 document.observe('dom:loaded', function() {
 
     if ($$('div.shopping-cart-totals').length == 1) {
@@ -1048,8 +1056,6 @@ document.observe('dom:loaded', function() {
 
         /* Handle place order click event */
         $('onestepcheckout-place-order').observe('click', function(e)   {
-
-
             // First validate the form
             var form = new VarienForm('onestepcheckout-form');
 
@@ -1058,11 +1064,37 @@ document.observe('dom:loaded', function() {
             }
             else    {
                 /* Disable button to avoid multiple clicks */
-                var element = e.element();
-                element.disabled = true;
-
-                /* Submit the form */
-                $('onestepcheckout-form').submit();
+                // var element = e.element();
+                //  element.disabled = false;
+                /* Submit the form 
+                 $('onestepcheckout-form').submit();*/
+                 jQuery('#ajax_cart_overlay').show();
+                jQuery.ajax({
+                  type:'post',
+                  url:'/onestepcheckout/',
+                  dataType:'html',
+                  data:jQuery('#onestepcheckout-form').serialize(),
+                  success:function(data){
+                    if(data.substring(0,4)=='http'){
+                    window.location.href=data;
+                    }else{
+                      var email=jQuery(data).find('#onestepcheckout-email-error-message');
+                      var pay=jQuery(data).find('.onestepcheckout-payment-method-error'); 
+                               emailError.hide();  
+                               payError.hide();
+                      if(email){
+                          emailError.html(email);
+                          emailError.show();
+                      }if(pay){
+                         payError.show();
+                      }
+                      jQuery('#ajax_cart_overlay').hide();
+                      jQuery('html, body').animate({
+                         scrollTop: 450},100)
+                    }
+                  }
+                })
+                 Event.stop(e);
             }
         });
 

@@ -33,6 +33,7 @@
 #billing_address_list,.onestepcheckout-shipping-method-block,#checkout-payment-method-load{
     border: 1px #c3c3c3 solid;
     padding-left: 24px;
+    overflow: hidden;
 }
 #billing_address_list span{
     color: #bf1111;
@@ -41,16 +42,13 @@
     overflow: hidden;
     margin-bottom: 14px;
 }
-#billing_address_list .input-box{
-    width: 450px;
-}
 .input-box label{
     display: block;
     height: 28px;
     line-height: 28px;
     float: left;  
     margin-right: 6px;
-    width: 82px;
+    width: 136px;
     font-size: 14px;
     text-align: right;
 }
@@ -66,7 +64,8 @@
     color: #999999;
 }
 .deliver{
-    margin-left: 51px;
+    margin-left: 100px;
+    font-size: 14px;
 }
 .create_account{
     margin-left: 54px;
@@ -340,7 +339,7 @@ div.onestepcheckout-comments textarea {
     background: url(../images/loginRightnow.png) no-repeat;
 }
 .payment-methods{
-    margin: 20px 40px;
+    margin: 20px;
 }
 #onestepcheckout-forgot-button{
     width: 114px;
@@ -381,10 +380,9 @@ div.onestepcheckout-comments textarea {
     height: 24px;
 }
 .onestepcheckout-error{
-    width: 926px;
     height: 30px;
     line-height: 30px;
-    padding-left: 100px;
+    padding: 0 100px;
     border: 1px #f08200 solid;
     color: #000000;
     font-size: 14px;
@@ -399,4 +397,6 @@ div.onestepcheckout-comments textarea {
     top: 3px;
     right: 54px;
 }
+.input-error input{
+    border: 1px #f08200 solid;
 }
