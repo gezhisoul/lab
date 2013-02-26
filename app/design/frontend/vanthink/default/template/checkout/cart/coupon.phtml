@@ -29,7 +29,7 @@
         <div class="discount-form">
             <div class="privilege mt10 cf form-list">
                 <label for="remove-coupone" class="fl">使用优惠券：</label>
-            
+            <input type="hidden" name="remove" id="remove-coupone" value="0">
             <div class="input-box fl">
                 <input class="input-text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
             </div>
@@ -44,7 +44,6 @@
     </div>
 </form>
 <script type="text/javascript">
-//<![CDATA[
 var discountForm = new VarienForm('discount-coupon-form');
 discountForm.submit = function (isRemove) {
     if (isRemove) {
@@ -56,5 +55,4 @@ discountForm.submit = function (isRemove) {
     }
     return VarienForm.prototype.submit.bind(discountForm)();
 }
-//]]>
 </script>

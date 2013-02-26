@@ -212,10 +212,7 @@
             <?php else: ?>
                 <?php echo $this->helper('checkout')->formatPrice($_incl-$_item->getWeeeTaxRowDisposition()) ?>
             <?php endif; ?>
-
         </span>
-
-
         <?php if (Mage::helper('weee')->getApplied($_item)): ?>
 
             <div class="cart-tax-info" id="subtotal-item-tax-details<?php echo $_item->getId(); ?>" style="display:none;">

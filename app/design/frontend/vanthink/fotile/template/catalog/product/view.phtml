@@ -204,13 +204,15 @@
           <ul>
             <li onClick="x:HoverLi(1);" id="tb_1" class="tm1"><a href="javascript:;">产品参数</a><b></b></li>
             <li onClick="x:HoverLi(2);" id="tb_2" class="tm2"><a href="javascript:;">商品展示</a><b></b></li>
-            <li onClick="x:HoverLi(3);" id="tb_3" class="tm3"><a href="javascript:;">用户评价</a><b></b></li>
+            <li onClick="x:HoverLi(3);" id="tb_3" class="tm3"><a href="javascript:;">咨询服务</a><b></b></li>
+            <li onClick="x:HoverLi(4);" id="tb_4" class="tm4"><a href="javascript:;">用户评价</a><b></b></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="product_details">
       <div id="tbc_01" style="display: block;">
+
         <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
         <?php if ($alias <> 'description'): ?>
         <div class="box-collateral <?php echo "box-{$alias}"?>">
@@ -226,14 +228,7 @@
         <?php endforeach;?>
         <?php print $_product->getDescription();?>
         <?php echo $this->getChildHtml('product_review') ?>
-        <div class="offline-product storeContect">
-              <a href="javascript:void(0);" class="offContect"></a>
-              <label>请填写您的联系信息，我们将第一时间联系您。</label>
-            </div>
-        <div class="storeQuestion">
-    <?php echo $this->getChildHtml('productquestions') ?>
-    <div class="closeQuestion"></div>
-    </div>
+        
       </div>
       <div style="display: none;" id="tbc_02">
         <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
@@ -254,6 +249,17 @@
     </div>
       </div>
       <div style="display: none;" id="tbc_03">
+        <?php echo $this->getChildHtml('productquestions') ?>
+        <div class="offline-product storeContect">
+              <a href="javascript:void(0);" class="offContect"></a>
+              <label>请填写您的联系信息，我们将第一时间联系您。</label>
+            </div>
+        <div class="storeQuestion">
+    <?php echo $this->getChildHtml('productquestions') ?>
+    <div class="closeQuestion"></div>
+    </div>
+      </div>
+      <div style="display: none;" id="tbc_04">
         <?php echo $this->getChildHtml('product_review') ?>
          <div class="storeQuestion">
     <?php echo $this->getChildHtml('productquestions') ?>
@@ -428,12 +434,12 @@ var sintantTop=jQuery('.sintantTop').children('label');
     jQuery(function(){
       var storeQuestion=jQuery('.storeQuestion');
       var offContect=jQuery('.offContect');
-      var sy=offContect.offset().top;
-      storeQuestion.css('top',sy-230);
         offContect.click(function(){
+          var sy=offContect.offset().top;
+          storeQuestion.css('top',sy-360);
            storeQuestion.show();
            jQuery('.back-to').after("<div id='onestepcheckout_popup_overlay'></div>");
-        })
+        });
       jQuery('.closeQuestion').click(function(){
         storeQuestion.hide();
         jQuery('#onestepcheckout_popup_overlay').remove();

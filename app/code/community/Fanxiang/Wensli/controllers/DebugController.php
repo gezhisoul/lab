@@ -16,6 +16,10 @@ class Fanxiang_Wensli_DebugController extends Mage_Core_Controller_Front_Action 
 
     public function indexAction() {
         print "Hello world";
+        $setup = new Mage_Catalog_Model_Resource_Eav_Mysql4_Setup();
+        $setup->startSetup();
+        $setup->removeAttribute('catalog_product', 'enable_googlecheckout');
+        $setup->endSetup();
     }
 
     public function testProductViewedAction() {

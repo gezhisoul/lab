@@ -85,6 +85,18 @@ jQuery(function() {
 
 
     // advanced search form js
+    jQuery('#basic-search-tab').click(function() {
+        jQuery('#basic-search').show();
+        jQuery('#advanced-search').hide();
+        jQuery(this).parent().find('li').removeClass('active');
+        jQuery(this).addClass('active');
+    });
+    jQuery('#advanced-search-tab').click(function() {
+        jQuery('#advanced-search').show();
+        jQuery('#basic-search').hide();
+        jQuery(this).parent().find('li').removeClass('active');
+        jQuery(this).addClass('active');
+    });
 
     jQuery('#enable-set-22').addClass('focus');
     jQuery('.enable-set-22').show();

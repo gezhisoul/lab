@@ -135,8 +135,7 @@
     display: none;
 }
 .price-box .price{
-    font-family: "Impact";
-    font-size: 23px;
+    font-size: 20px;
     color: #f08200;
 }
 .products-grid{
@@ -394,7 +393,6 @@
     width: 300px;
     height: 26px;
     overflow: hidden;
-    margin-bottom: 4px;
     color: #666666;
 }
 .product_details .parameter .key label{
@@ -402,7 +400,7 @@
     background: #f08200;
 }
 .parameter label,.storeProduct .box-collateral li label{
-    float: left;
+   /*  float: left;
     width: 80px;
     height: 25px;
     line-height: 24px;
@@ -412,7 +410,7 @@
     border-style: solid;
     border-color: #d4d3d1;
     margin-right: 16px;
-    color: #666666;
+    color: #666666;*/
 }
 .parameter  span,.storeProduct .box-collateral li span{
     width: 180px;
@@ -840,6 +838,9 @@ input.qty {
     padding-left: 32px;
     font-family: "Microsoft YaHei","微软雅黑";
 }
+.product_details .storeContect{
+    margin-top: 16px;
+}
 .storeContect span{
     font-size: 16px;
     margin-right: 10px;
@@ -1016,4 +1017,10 @@ input.qty {
 }
 .cart-collaterals .col2-set{
     width: 500px;
+}
+.discount{
+    width: 500px;
+}
+.discount-form .form-list .input-text{
+    width: 150px;
 }

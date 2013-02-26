@@ -1,4 +1,4 @@
-.catalogsearch-advanced-index h2{
+.catalogsearch-advanced-index .page-title{
     color: #333333;
     width: 982px;
     height: 32px;
@@ -17,6 +17,25 @@
     -ms-filter:"progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ebebea', endColorstr='#dedcdd')";
     background: linear-gradient(#ebebea, #dedcdd);
 }
+
+.page-title ul li {
+  float: left;
+  margin-left: 10px;
+  line-height: 30px;
+  height: 30px;
+  padding: 0 5px 0;
+  cursor: pointer;
+}
+
+.page-title ul .active {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-color: #D4D3D1;
+  border-style: solid;
+  border-width: 1px 0 0 1px;
+  color: #666666;
+  text-align: center;
+}
+
 .set-tab{
     width: 738px;
     height: 30px;
@@ -125,4 +144,50 @@
 }
 .catalogsearch-result-index .list-left{
     margin-top: 10px;
+}
+
+/* add by wangxianbin */
+/* edit at 2013-02-25 */
+.enable-checkbox {
+  display: none;
+  float: left;
+  width: 190px;
+}
+
+#advanced-search-list li {
+  display: none;
+}
+
+.input-range .input-text {
+  width: 98px;
+}
+
+.form-list-checkbox {
+  background-color: #F4F4F4;
+  border: 1px solid #E0E0E0;
+  margin-top: 10px;
+  padding: 13px 20px;
+}
+
+.advanced-search .buttons-set .button {
+  background: url("../images/advanced-button.jpg") no-repeat scroll 0 0 transparent;
+  height: 30px;
+  padding-bottom: 6px;
+  width: 113px;
+}
+
+li.base-attribute {
+  width: 436px;
+}
+
+.base-attributes-list .base-attribute-name input {
+  width: 236px;
+}
+
+.base-attributes {
+  margin: 31px;
+}
+
+#advanced-search {
+  display: none;
 }

@@ -29,7 +29,7 @@
  */
 ?>
 <?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
-<li class="finallyPrice">
+<li class="finallyPrice a-right">
     
         <strong><?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?></strong>
 
@@ -37,12 +37,12 @@
     
 </li>
 <?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
-<li class="finallyPrice">
+<li class="finallyPrice a-right">
         <strong><?php echo $this->helper('tax')->__('Grand Total Incl. Tax')?></strong>
      <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
 </li>
 <?php else:?>
-<li class="finallyPrice">
+<li class="finallyPrice a-right">
         <strong><?php echo $this->getTotal()->getTitle() ?></strong>
 <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
 </li>

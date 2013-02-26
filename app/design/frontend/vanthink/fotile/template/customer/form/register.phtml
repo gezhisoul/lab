@@ -108,18 +108,18 @@
         var realEmail=email.val();
          var re = /^[0-9]+.?[0-9]*$/;
         coverEmail.blur(function(){
+            var user=(coverEmail.val().indexOf("@"));
             email.attr("value",coverEmail.val())
             if(coverEmail.val().match(re)){
-                console.log('sdsd')
-                email.attr("value",coverEmail.val()+"@fotile.com")
-            }
-        var user=(coverEmail.val().indexOf("@"));
-        if(user){
+                email.attr("value",coverEmail.val()+"@fotile.com");
+                userName.val(coverEmail.val());
+            }else if(user){
         userName.val(coverEmail.val().substring(0,user));
+        }else{
+            userName.val(coverEmail.val());
         }
-        userName.val(coverEmail.val());
-        jQuery('#firstname').val(coverEmail.val());
-        jQuery('#lastname').val(coverEmail.val());
+        jQuery('#firstname').val(userName.val().substring(0,1));
+        jQuery('#lastname').val(userName.val().substring(1,userName.val().length));
         })
     })
 </script>
